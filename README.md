@@ -48,5 +48,12 @@
 
 # 機能の実装方針予定
 
-- Stimulus Autocomplete、JQueryでのマルチ検索。
-- 時間があれば、Google Mapsで位置情報なども入れていきたいです。
+| カテゴリー      | 技術                        |
+|----------------|-----------------------------|
+| データベース    | PostgreSQL                  |
+| 認証            | OmniAuth                    |
+| ストレージ      | Amazon S3                   |
+| ホスティング    | Render.com                  |
+| フロントエンド  | TailwindCSS, DaisyUI        |
+| 検索機能        | Stimulus Autocomplete, jQuery |
+| API             | Google Maps API             |
