@@ -62,4 +62,4 @@
 Figma：https://www.figma.com/design/38r8B7WcRUTi3UsdqLkztU/%E7%84%A1%E9%A1%8C?node-id=0-1&node-type=canvas&t=vzNsfGeyqBz0bItA-0
 
 ### ER図
-[file:///Users/apple/Downloads/giftrail.svg](https://drive.google.com/file/d/1I_s0D5DbRzpXmp6Bwje9ar2b-Rblgovd/view?usp=sharing)
+[file:///Users/apple/Downloads/giftrail.svg](https://drive.google.com/file/d/1rIyXoPScdyIBaGuOb8k80FM37ze7mOke/view?usp=drive_link)
