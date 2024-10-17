@@ -16,6 +16,15 @@ module Myapp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Set the default locale to Japanese
+    config.i18n.default_locale = :ja
+
+    # Optimize asset precompilation
+    config.assets.initialize_on_precompile = false
+
+    # Add paths for asset loading
+    config.assets.paths << Rails.root.join('config')
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -23,5 +32,12 @@ module Myapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Configure generators
+    config.generators do |g|
+      g.skip_routes true # Don't generate routes automatically
+      g.helper false # Don't generate helper files automatically
+      g.test_framework nil # Don't use a test framework
+    end
   end
 end
