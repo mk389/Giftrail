@@ -35,9 +35,9 @@ module Myapp
 
     # Configure generators
     config.generators do |g|
-      g.skip_routes true # Don't generate routes automatically
-      g.helper false # Don't generate helper files automatically
-      g.test_framework nil # Don't use a test framework
+      g.skip_routes true # ルーティングを自動で記述しないようにする
+      g.helper false # ヘルパーファイルを自動生成しないようにする
+      g.test_framework nil # テストフレームワークを使わないようにする
     end
   end
 end
