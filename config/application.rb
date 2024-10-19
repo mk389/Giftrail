@@ -23,7 +23,7 @@ module Myapp
     config.assets.initialize_on_precompile = false
 
     # Add paths for asset loading
-    config.assets.paths << Rails.root.join('config')
+    config.assets.paths << Rails.root.join("config")
 
     # Configuration for the application, engines, and railties goes here.
     #
