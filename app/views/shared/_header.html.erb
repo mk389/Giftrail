@@ -1,39 +1,30 @@
-<header>
-  <nav class='navbar navbar-expand-lg navigation navbar-light bg-light'>
-    <%= link_to '/', class: 'navbar-brand' do %>
-      <%= image_tag 'logo.png' %>
-    <% end %>
-    <button class='navbar-toggler' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
-      aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-      <span class='navbar-toggler-icon'></span>
-    </button>
+<div class="navbar bg-base-100 flex justify-between">
+  <div class="flex-1">
+    <a class="btn btn-ghost text-3xl">Giftrail</a>
+  </div>
+  
+  <label class="btn btn-circle swap swap-rotate">
+    <input type="checkbox" />
 
-    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-      <ul class='navbar-nav ms-auto main-nav align-items-center'>
-        <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to '掲示板', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-            <%= link_to '掲示板一覧', '#', class: 'dropdown-item' %>
-            <%= link_to '掲示板作成', '#', class: 'dropdown-item' %>
-          </div>
-        </li>
+    <!-- hamburger icon -->
+    <svg
+      class="swap-off fill-current"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 512 512">
+      <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+    </svg>
 
-        <li class='nav-item'>
-          <%= link_to 'ブックマーク一覧', '#', class: 'nav-link' %>
-        </li>
-
-        <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
-            <%= image_tag 'sample.jpg', class: 'rounded-circle mr15', width: '40', height: '40' %>
-          <% end %>
-          <div class='dropdown-menu dropdown-menu-end'>
-            <div class='dropdown-item'>らんてっく たろう</div>
-            <div class='dropdown-divider'></div>
-            <%= link_to 'プロフィール', '#', class: 'dropdown-item' %>
-            <%= link_to 'ログアウト', '#', class: 'dropdown-item' %>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+    <!-- close icon -->
+    <svg
+      class="swap-on fill-current"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 512 512">
+      <polygon
+        points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+    </svg>
+  </label>
+</div>
