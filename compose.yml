@@ -25,8 +25,12 @@ services:
       - .:/myapp
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
+      - ./config/credentials.yml.enc:/myapp/config/credentials.yml.enc  # 追加: credentialsファイルのマウント
+      - ./config/master.key:/myapp/config/master.key                  # 追加: master.keyファイルのマウント
     environment:
       TZ: Asia/Tokyo
+      RAILS_ENV: development                                       # 環境変数の設定 (開発環境)
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}                        # 追加: 環境変数からマスターキーを取得
     ports:
       - "3000:3000"
     depends_on:
