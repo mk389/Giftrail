@@ -30,7 +30,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development                                       # 環境変数の設定 (開発環境)
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}                        # 追加: 環境変数からマスターキーを取得
+      RAILS_MASTER_KEY: 3888dd7220aba44ec3b5cf319487b59f           # 追加: 環境変数からマスターキーを取得
     ports:
       - "3000:3000"
     depends_on:
