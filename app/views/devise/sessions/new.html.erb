@@ -1,32 +1,32 @@
 <div class="hero bg-base-200 min-h-screen">
   <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold py-6">LOGIN</h1>
-    </div>
     <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <form class="card-body">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">メールアドレス</span>
-          </label>
-          <input type="email" placeholder="メールアドレス" class="input input-bordered" required />
+        <div class="text-center lg:text-left">
+          <h1 class="text-8xl font-bold py-6">LOGIN</h1>
         </div>
         <div class="form-control">
-          <label class="label">
+          <label class="label" for="email">
+            <span class="label-text">メールアドレス</span>
+          </label>
+          <input type="text" id="email" name="email" placeholder="メールアドレス" class="input input-bordered" required autocomplete="username">
+        </div>
+        <div class="form-control">
+          <label class="label" for="password">
             <span class="label-text">パスワード</span>
           </label>
-          <input type="パスワード" placeholder="password" class="input input-bordered" required />
+          <input type="password" id="password" name="password" placeholder="パスワード" class="input input-bordered" required autocomplete="current-password">
         </div>
         <div class="form-control mt-6">
           <button class="btn btn-primary">ログイン</button>
         </div>
       </form>
       <div class="card-body text-center">
-      <label class="label">
-        <p class="mt-1">
-           パスワードを忘れた方は <a href="#" class="link link-hover">こちら</a>
-        </p>
-      </label>
+        <label class="label">
+          <p class="mt-1">
+            パスワードを忘れた方は <a href="#" class="link link-hover">こちら</a>
+          </p>
+        </label>
         <p class="mt-2">
           アカウントを持っていない方は <a href="#" class="link link-hover">こちら</a>
         </p>

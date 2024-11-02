@@ -1,47 +1,47 @@
 <div class="hero bg-base-200 min-h-screen flex items-center justify-center">
-  <div class="text-center mb-4 w-full max-w-sm">
-    <<h1 className="text-[min(13vw,130px)]">新規登録</h1>
-  </div>
   <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-8xl font-bold py-6">アカウント作成</h1>
+    </div>
     <form class="card-body">
       <div class="form-control">
-        <label class="label">
+        <label class="label" for="username">
           <span class="label-text">ユーザー名</span>
         </label>
         <div class="flex items-center">
           <span class="icon mr-2"><i class="fas fa-user"></i></span>
-          <input type="text" placeholder="ユーザー名" class="input input-bordered w-full" required />
+          <input type="text" id="username" name="username" placeholder="ユーザー名" class="input input-bordered w-full" required />
         </div>
       </div>
       <div class="form-control">
-        <label class="label">
+        <label class="label" for="email">
           <span class="label-text">メールアドレス</span>
         </label>
         <div class="flex items-center">
           <span class="icon mr-2"><i class="fas fa-envelope"></i></span>
-          <input type="email" placeholder="メールアドレス" class="input input-bordered w-full" required />
+          <input type="email" id="email" name="email" placeholder="メールアドレス" class="input input-bordered w-full" required />
         </div>
       </div>
       <div class="form-control">
-        <label class="label">
+        <label class="label" for="password">
           <span class="label-text">パスワード</span>
         </label>
         <div class="flex items-center">
           <span class="icon mr-2"><i class="fas fa-lock"></i></span>
-          <input type="password" placeholder="パスワード" class="input input-bordered w-full" required />
+          <input type="password" id="password" name="password" placeholder="パスワード" class="input input-bordered w-full" required />
         </div>
       </div>
       <div class="form-control">
-        <label class="label">
+        <label class="label" for="password_confirmation">
           <span class="label-text">パスワード確認</span>
         </label>
         <div class="flex items-center">
           <span class="icon mr-2"><i class="fas fa-lock"></i></span>
-          <input type="password" placeholder="パスワード確認" class="input input-bordered w-full" required />
+          <input type="password" id="password_confirmation" name="password_confirmation" placeholder="パスワード確認" class="input input-bordered w-full" required />
         </div>
       </div>
       <div class="form-control mb-3">
-        <label class="label">
+        <label class="label" for="board_image">
           <span class="label-text">プロフィール画像</span>
         </label>
         <div class="flex items-center">
