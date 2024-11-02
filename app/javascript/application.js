@@ -11,3 +11,13 @@ application.debug = false
 window.Stimulus = application
 
 export { application }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+  
+    menuToggle.addEventListener('change', function() {
+      navMenu.classList.toggle('hidden', !this.checked);
+    });
+  });
+  
