@@ -1,0 +1,15 @@
+ja:
+  devise:
+    registrations:
+      user:
+        email:
+          invalid: "有効なメールアドレスを入力してください。"
+        password_confirmation:
+          confirmation: "パスワードが一致しません。"
+    failures:
+      invalid: "無効なメールアドレスまたはパスワードです。"
+      locked: "アカウントはロックされています。"
+      timeout: "セッションがタイムアウトしました。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"

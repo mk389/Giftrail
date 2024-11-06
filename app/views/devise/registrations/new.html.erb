@@ -1,60 +1,57 @@
 <div class="hero bg-base-200 min-h-screen flex items-center justify-center">
-  <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+  <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
     <div class="text-center mb-4" style="margin-top: 40px;">
       <h1 class="text-4xl font-bold py-6">アカウント作成</h1>
     </div>
-    <form class="card-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'card-body' }) do |f| %>
+      <% if resource.errors.any? %>
+        <div id="error_explanation" class="alert alert-error mb-4">
+          <ul>
+            <% resource.errors.full_messages.uniq.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <div class="form-control">
-        <label class="label" for="username">
+        <label class="label" for="user_name">
           <span class="label-text">ユーザー名</span>
         </label>
-        <div class="flex items-center">
-          <span class="icon mr-2"><i class="fas fa-user"></i></span>
-          <input type="text" id="username" name="username" placeholder="ユーザー名" class="input input-bordered w-full" required />
-        </div>
+        <%= f.text_field :name, placeholder: "ユーザー名", class: "input input-bordered w-full", required: true %>
       </div>
+
       <div class="form-control">
-        <label class="label" for="email">
+        <label class="label" for="user_email">
           <span class="label-text">メールアドレス</span>
         </label>
-        <div class="flex items-center">
-          <span class="icon mr-2"><i class="fas fa-envelope"></i></span>
-          <input type="email" id="email" name="email" placeholder="メールアドレス" class="input input-bordered w-full" required />
-        </div>
+        <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true, autocomplete: "email" %>
       </div>
+
       <div class="form-control">
-        <label class="label" for="password">
+        <label class="label" for="user_password">
           <span class="label-text">パスワード</span>
         </label>
-        <div class="flex items-center">
-          <span class="icon mr-2"><i class="fas fa-lock"></i></span>
-          <input type="password" id="password" name="password" placeholder="パスワード" class="input input-bordered w-full" required />
-        </div>
+        <%= f.password_field :password, placeholder: "パスワード", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
       </div>
+
       <div class="form-control">
-        <label class="label" for="password_confirmation">
+        <label class="label" for="user_password_confirmation">
           <span class="label-text">パスワード確認</span>
         </label>
-        <div class="flex items-center">
-          <span class="icon mr-2"><i class="fas fa-lock"></i></span>
-          <input type="password" id="password_confirmation" name="password_confirmation" placeholder="パスワード確認" class="input input-bordered w-full" required />
-        </div>
+        <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
       </div>
+
       <div class="form-control mb-3">
-        <label class="label" for="board_image">
+        <label class="label" for="user_board_image">
           <span class="label-text">プロフィール画像</span>
         </label>
-        <div class="flex items-center">
-          <span class="icon mr-4"><i class="fas fa-image"></i></span>
-          <input type="file" name="board_image" id="board_image" class="hidden" accept="image/*" required />
-          <button type="button" class="btn btn-outline max-w-xs flex items-center" style="height: 40px;" onclick="document.getElementById('board_image').click();">
-            <i class="mr-2"></i> Choose File
-          </button>
-        </div>
+        <%= f.file_field :board_image, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
       </div>
+
       <div class="form-control mt-6">
-        <button class="btn btn-primary">アカウント登録</button>
+        <%= f.submit "アカウント登録", class: "btn btn-primary" %>
       </div>
-    </form>
+    <% end %>
   </div>
 </div>

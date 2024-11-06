@@ -10,14 +10,14 @@ const application = Application.start()
 application.debug = false
 window.Stimulus = application
 
-export { application }
+document.addEventListener("turbo:render", function() {
+    console.log("turbo:render event fired");
+    const flashMessage = document.getElementById("flash-message");
+    if (flashMessage) {
+      setTimeout(() => {
+        flashMessage.style.display = "none";
+      }, 3000);  // 3秒後に非表示にする
+    }
+  }); 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
-  
-    menuToggle.addEventListener('change', function() {
-      navMenu.classList.toggle('hidden', !this.checked);
-    });
-  });
-  
+export { application }
