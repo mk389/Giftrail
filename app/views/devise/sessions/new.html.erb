@@ -1,36 +1,40 @@
-<div class="hero bg-base-200 min-h-screen">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <form class="card-body">
-        <div class="text-center lg:text-left">
-          <h1 class="text-6xl font-bold py-6">ログイン</h1>
-        </div>
-        <div class="form-control">
-          <label class="label" for="email">
-            <span class="label-text">メールアドレス</span>
-          </label>
-          <input type="text" id="email" name="email" placeholder="メールアドレス" class="input input-bordered" required autocomplete="username">
-        </div>
-        <div class="form-control">
-          <label class="label" for="password">
-            <span class="label-text">パスワード</span>
-          </label>
-          <input type="password" id="password" name="password" placeholder="パスワード" class="input input-bordered" required autocomplete="current-password">
-        </div>
-        <div class="form-control mt-6">
-          <button class="btn btn-primary">ログイン</button>
-        </div>
-      </form>
-      <div class="card-body text-center">
-        <label class="label">
-          <p class="mt-1">
-            パスワードを忘れた方は <a href="#" class="link link-hover">こちら</a>
-          </p>
+<div class="hero bg-base-200 min-h-screen flex items-center justify-center">
+  <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-4xl font-bold py-6">ログイン</h1>
+    </div>
+    <form class="card-body">
+      <div class="form-control">
+        <label class="label" for="email">
+          <span class="label-text">メールアドレス</span>
         </label>
-        <p class="mt-2">
-          アカウントを持っていない方は <a href="#" class="link link-hover">こちら</a>
-        </p>
+        <div class="flex items-center">
+          <span class="icon mr-2"><i class="fas fa-envelope"></i></span>
+          <input type="email" id="email" name="email" placeholder="メールアドレス" class="input input-bordered w-full" required autocomplete="username">
+        </div>
       </div>
+      <div class="form-control">
+        <label class="label" for="password">
+          <span class="label-text">パスワード</span>
+        </label>
+        <div class="flex items-center">
+          <span class="icon mr-2"><i class="fas fa-lock"></i></span>
+          <input type="password" id="password" name="password" placeholder="パスワード" class="input input-bordered w-full" required autocomplete="current-password">
+        </div>
+      </div>
+      <div class="form-control mt-6">
+        <button class="btn btn-primary">ログイン</button>
+      </div>
+    </form>
+    <div class="card-body text-center">
+      <label class="label">
+        <p class="mt-1">
+          パスワードを忘れた方は <a href="#" class="link link-hover">こちら</a>
+        </p>
+      </label>
+      <p class="mt-2">
+        アカウントを持っていない方は <a href="#" class="link link-hover">こちら</a>
+      </p>
     </div>
   </div>
 </div>

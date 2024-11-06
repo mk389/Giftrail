@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root 'home#index'
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  devise_for :users
+  root 'home#index'
 end
