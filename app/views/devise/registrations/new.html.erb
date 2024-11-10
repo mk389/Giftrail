@@ -14,43 +14,58 @@
         </div>
       <% end %>
 
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label" for="user_name">
           <span class="label-text">ユーザー名</span>
         </label>
-        <%= f.text_field :name, placeholder: "ユーザー名", class: "input input-bordered w-full", required: true %>
+        <div class="flex items-center">
+          <i class="fas fa-user mr-4"></i> <!-- ユーザー名アイコン -->
+          <%= f.text_field :name, placeholder: "ユーザー名", class: "input input-bordered w-full", required: true %>
+        </div>
       </div>
 
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label" for="user_email">
           <span class="label-text">メールアドレス</span>
         </label>
-        <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true, autocomplete: "email" %>
+        <div class="flex items-center">
+          <i class="fas fa-envelope mr-4"></i> <!-- メールアイコン -->
+          <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true, autocomplete: "email" %>
+        </div>
       </div>
 
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label" for="user_password">
           <span class="label-text">パスワード</span>
         </label>
-        <%= f.password_field :password, placeholder: "パスワード", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
+        <div class="flex items-center">
+          <i class="fas fa-lock mr-4"></i> <!-- パスワードアイコン -->
+          <%= f.password_field :password, placeholder: "パスワード", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
+        </div>
       </div>
 
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label" for="user_password_confirmation">
           <span class="label-text">パスワード確認</span>
         </label>
-        <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
+        <div class="flex items-center">
+          <i class="fas fa-lock mr-4"></i> <!-- パスワード確認アイコン -->
+          <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
+        </div>
       </div>
 
-      <div class="form-control mb-3">
+      <div class="form-control mb-4">
         <label class="label" for="user_board_image">
           <span class="label-text">プロフィール画像</span>
         </label>
-        <%= f.file_field :board_image, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
+        <div class="flex items-center">
+          <i class="fas fa-image mr-4"></i> <!-- プロフィール画像アイコン -->
+          <%= f.file_field :board_image, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
+        </div>
       </div>
 
       <div class="form-control mt-6">
-        <%= f.submit "アカウント登録", class: "btn btn-primary" %>
+        <%= f.submit "アカウント登録", class: "btn btn-primary w-full" %>
       </div>
     <% end %>
   </div>
