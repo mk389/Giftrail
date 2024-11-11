@@ -25,7 +25,7 @@ Devise.setup do |config|
   # パスワードリセットに使用するキーの有効期間を6時間に設定
   config.reset_password_within = 6.hours
   # サインアウトのHTTPメソッドをDELETEに設定
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
   # エラーレスポンスのHTTPステータスを422 Unprocessable Entityに設定
   config.responder.error_status = :unprocessable_entity
   # リダイレクトのHTTPステータスを303 See Otherに設定

@@ -4,35 +4,27 @@ class PostsController < ApplicationController
   end
 
   def create
+    if current_user.nil?
+      flash[:alert] = 'ログインしてください。'
+      redirect_to new_post_path
+      return
+    end
+
     @post = Post.new(post_params)
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to @post, notice: '投稿が作成されました'
+      flash[:notice] = '投稿が作成されました！'
+      redirect_to @post
     else
-      render :new, alert: '投稿に失敗しました'
+      flash.now[:alert] = '投稿に失敗しました。'
+      render :new
     end
   end
 
-  def index
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-end
-
-private
+  private
 
   def post_params
-    params.require(:post).permit(:title, :body, :prefecture, :image)  # 必要なパラメータのみ許可
+    params.require(:post).permit(:title, :body, :prefecture, :image)
   end
 end
