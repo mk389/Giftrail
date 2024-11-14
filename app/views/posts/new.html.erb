@@ -1,2 +1,67 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="hero bg-base-200 min-h-screen flex items-center justify-center">
+  <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-4xl font-bold py-6">投稿作成</h1>
+    </div>
+    <%= form_with model: @post, local: true, html: { class: 'card-body' } do |f| %>
+      <% if @post.errors.any? %>
+        <div id="error_explanation" class="alert alert-error mb-4">
+          <ul>
+            <% @post.errors.full_messages.uniq.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- タイトル入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_title">
+          <span class="label-text">タイトル</span>
+        </label>
+        <div class="flex items-center">
+        <i class="fas fa-pencil-alt mr-4"></i> <!-- タイトルアイコン -->
+          <%= f.text_field :title, placeholder: "タイトル", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- コメント入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_body">
+          <span class="label-text">コメント</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-comment mr-4"></i> <!-- コメントアイコン -->
+          <%= f.text_area :body, placeholder: "コメント", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- 場所入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_prefecture">
+          <span class="label-text">場所</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-map-marker-alt mr-4"></i> <!-- 場所アイコン -->
+          <%= f.text_field :prefecture, placeholder: "場所", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- 画像入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_image">
+          <span class="label-text">画像</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-image mr-4"></i> <!-- 画像アイコン -->
+          <%= f.file_field :image, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
+        </div>
+      </div>
+
+      <!-- 投稿ボタン -->
+      <div class="form-control mt-6">
+        <%= f.submit "投稿する", class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>
