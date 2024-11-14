@@ -20,13 +20,7 @@
 
   <body>
     <%= render "shared/header" %>
-
-  <% flash.each do |type, message| %>
-    <div id="flash-message" class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %>">
-      <%= message %>
-    </div>
-  <% end %>
-
+    <%= render 'shared/flash_message' %>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

@@ -1,16 +1,12 @@
 module.exports = {
   content: [
-    './app/views/**/*.{html,erb}',    // ビュー内のHTMLやERBファイル
-    './app/helpers/**/*.rb',          // ヘルパーのRubyファイル（クラスが動的に挿入される場合）
-    './app/javascript/**/*.js',       // JavaScriptファイル
+    './app/views/**/*.html.erb',
+    './app/helpers/**/*.rb',
+    './app/assets/stylesheets/**/*.css',
+    './app/javascript/**/*.js'
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require('daisyui'), // DaisyUIプラグインの追加
-  ],
+  plugins: [require("daisyui")],
   daisyui: {
-    themes: ['pastel'], // 使用するテーマを選択
-  },
+    themes: ['pastel'],
+  },  
 }
