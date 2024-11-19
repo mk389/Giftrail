@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: myapp_development
     volumes:
-      - postgresql_data:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     healthcheck:
@@ -27,17 +27,18 @@ services:
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
       - ./config/credentials.yml.enc:/myapp/config/credentials.yml.enc  # 追加: credentialsファイルのマウント
-      - ./config/master.key:/myapp/config/master.key                  # 追加: master.keyファイルのマウント
+      - ./config/master.key:/myapp/config/master.key
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development                                       # 環境変数の設定 (開発環境)
-      RAILS_MASTER_KEY: 3888dd7220aba44ec3b5cf319487b59f           # 追加: 環境変数からマスターキーを取得
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
 volumes:
-  bundle_data:
-  postgresql_data:
-  node_modules:
+  bundle_data: {}
+  postgresql_data: {}
+  node_modules: {}
