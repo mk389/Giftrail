@@ -12,6 +12,8 @@
             <ul class="bg-base-100 rounded-t-none p-2 absolute left-0 mt-1">
               <li><%= link_to '投稿作成', new_post_path, class: 'btn btn-ghost px-2 py-2' %></li>
               <li><%= link_to '投稿一覧', posts_path, class: 'btn btn-ghost px-2 py-2' %></li>
+              <li><%= link_to 'お問い合わせ', '#', class: 'btn btn-ghost px-2 py-2' %></li>
+              <li><%= link_to '利用規約', '#', class: 'btn btn-ghost px-2 py-2' %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-ghost px-2 py-2' %></li>
             </ul>
           </details>

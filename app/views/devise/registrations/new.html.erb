@@ -14,56 +14,76 @@
         </div>
       <% end %>
 
+      <!-- ユーザー名 -->
       <div class="form-control mb-4">
-        <label class="label" for="user_name">
+        <label class="label w-full" for="user_name">
           <span class="label-text">ユーザー名</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-user mr-4"></i> <!-- ユーザー名アイコン -->
+        <div class="flex items-center w-full">
+          <i class="fas fa-user mr-4"></i> 
           <%= f.text_field :name, placeholder: "ユーザー名", class: "input input-bordered w-full", required: true %>
         </div>
       </div>
 
+      <!-- メールアドレス -->
       <div class="form-control mb-4">
-        <label class="label" for="user_email">
+        <label class="label w-full" for="user_email">
           <span class="label-text">メールアドレス</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-envelope mr-4"></i> <!-- メールアイコン -->
+        <div class="flex items-center w-full">
+          <i class="fas fa-envelope mr-4"></i>
           <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true, autocomplete: "email" %>
         </div>
       </div>
 
+      <!-- 居住地 -->
       <div class="form-control mb-4">
-        <label class="label" for="user_password">
-          <span class="label-text">パスワード</span>
+        <label class="label" for="post_location">
+          <span class="label-text">居住地</span>
         </label>
         <div class="flex items-center">
-          <i class="fas fa-lock mr-4"></i> <!-- パスワードアイコン -->
+          <i class="fas fa-map-marker-alt mr-4"></i>
+          <%= f.select :residence,
+          options_for_select(@residence.present? ? @residence.map { |entry| [entry[:name], entry[:name]] } : []),
+          { prompt: "居住地を選択" },
+          class: "select select-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- パスワード -->
+      <div class="form-control mb-4">
+        <label class="label w-full" for="user_password">
+          <span class="label-text">パスワード</span>
+        </label>
+        <div class="flex items-center w-full">
+          <i class="fas fa-lock mr-4"></i>
           <%= f.password_field :password, placeholder: "パスワード", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
         </div>
       </div>
 
+      <!-- パスワード確認 -->
       <div class="form-control mb-4">
-        <label class="label" for="user_password_confirmation">
+        <label class="label w-full" for="user_password_confirmation">
           <span class="label-text">パスワード確認</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-lock mr-4"></i> <!-- パスワード確認アイコン -->
+        <div class="flex items-center w-full">
+          <i class="fas fa-lock mr-4"></i>
           <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class: "input input-bordered w-full", required: true, autocomplete: "new-password" %>
         </div>
       </div>
 
+      <!-- プロフィール画像 -->
       <div class="form-control mb-4">
-        <label class="label" for="user_board_image">
+        <label class="label w-full" for="user_board_image">
           <span class="label-text">プロフィール画像</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-image mr-4"></i> <!-- プロフィール画像アイコン -->
-          <%= f.file_field :board_image, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
+        <div class="flex items-center w-full">
+          <i class="fas fa-image mr-4"></i>
+          <%= f.file_field :icon, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
         </div>
       </div>
 
+      <!-- 登録ボタン -->
       <div class="form-control mt-6">
         <%= f.submit "アカウント登録", class: "btn btn-primary w-full" %>
       </div>

@@ -1,6 +1,13 @@
 class PostsController < ApplicationController
+  include LocationHelper
+
+  def index
+    @posts = Post.all
+  end
+  
   def new
     @post = Post.new
+    @production_area = prefectures_and_countries
   end
 
   def create
@@ -10,17 +17,18 @@ class PostsController < ApplicationController
       return
     end
 
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.build(post_params)
+
+    # ActiveStorageに添付
+    if params[:post][:images].present?
+      params[:post][:images].each do |image|
+        @post.images.attach(image)
+      end
+    end
 
     if @post.save
-      # 画像がアップロードされた場合
-      if params[:post][:image].present?
-        @post.image.attach(params[:post][:image])
-      end
-
       flash[:notice] = '投稿が作成されました！'
-      redirect_to @post  # 投稿が作成された後にその投稿詳細ページにリダイレクト
+      redirect_to @post  # 投稿が作成された後に投稿詳細ページにリダイレクト
     else
       flash.now[:alert] = '投稿に失敗しました。'
       render :new
@@ -31,9 +39,25 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])  # params[:id] で指定された投稿を取得
   end
 
+  def destroy
+    @post = Post.find_by(id: params[:id])
+    if @post
+      @post.destroy
+      flash[:notice] = '投稿が削除されました。'
+    else
+      flash[:alert] = '投稿が見つかりませんでした。'
+    end
+    redirect_to posts_path
+  end
+  
+
   private
 
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
   def post_params
-    params.require(:post).permit(:title, :body, :prefecture, :image)
+    params.require(:post).permit(:title, :body, :production_area, images: [])
   end
 end

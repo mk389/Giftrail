@@ -22,8 +22,11 @@
     </button>
   </div>
 
-  <!-- DaisyUI ボタンの追加部分 -->
   <div class="flex justify-center mb-10">
-    <button class="btn btn-accent text-sm sm:text-base py-2 px-4">投稿してみる</button>
+    <% if user_signed_in? %>
+      <%= link_to "投稿してみる", new_post_path, class: "btn btn-accent text-sm sm:text-base py-2 px-4" %>
+    <% else %>
+      <%= link_to "投稿してみる", new_user_session_path, class: "btn btn-accent text-sm sm:text-base py-2 px-4" %>
+    <% end %>
   </div>
 </div>
