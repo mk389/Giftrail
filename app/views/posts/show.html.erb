@@ -1,38 +1,78 @@
 <section class="text-gray-600 body-font">
-  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-start">
+    <!-- 画像スライダー -->
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-      <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+      <% if @post.images.attached? %>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <% @post.images.each do |image| %>
+              <div class="swiper-slide">
+                <img class="object-cover object-center w-full h-full rounded aspect-w-1 aspect-h-1" alt="投稿画像" src="<%= url_for(image) %>">
+              </div>
+            <% end %>
+          </div>
+          <!-- ナビゲーションボタン -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <!-- ページネーション -->
+          <div class="swiper-pagination"></div>
+        </div>
+      <% else %>
+        <!-- 画像がない場合はダミー画像を表示 -->
+        <img class="object-cover object-center rounded w-full h-full" alt="投稿画像" src="https://dummyimage.com/720x600">
+      <% end %>
     </div>
+
+    <!-- 投稿の詳細部分 -->
     <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-      <!-- タイトルとアイコンを追加 -->
       <div class="relative mb-4 w-full">
-        <h1 class="title-font sm:text-4xl text-3xl font-medium text-gray-900">
-          <!-- 投稿タイトルを表示 -->
-          <span class="font-bold"><%= @post.title %></span><br class="hidden lg:inline-block">
-        </h1>
-        <!-- 編集アイコンと削除アイコン -->
-        <div class="absolute top-[-30px] right-0 flex space-x-4">
-          <button class="text-gray-500 hover:text-gray-700">
-            <!-- 編集アイコン -->
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="text-red-500 hover:text-red-700">
-            <!-- 削除アイコン -->
-            <i class="fas fa-trash-alt"></i>
-          </button>
+        <div class="flex flex-col">
+          <div class="flex justify-end space-x-4 mb-2">
+            <!-- 編集ボタン -->
+            <%= button_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
+              <i class="fas fa-edit text-gray-900"></i>
+            <% end %>
+
+            <!-- 削除ボタン（アイコン付き） -->
+            <%= button_to post_path(@post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-ghost btn-circle text-red-500' do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
+
+          <!-- 投稿タイトルとユーザー情報 -->
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+              <h1 class="title-font sm:text-4xl text-3xl font-medium text-gray-900">
+                <span class="font-bold"><%= @post.title %></span>
+              </h1>
+            </div>
+
+            <div class="flex items-center ml-auto space-x-4">
+              <div class="flex items-center">
+                <div class="avatar w-8 h-8 rounded-full overflow-hidden">
+                  <% if @post.user.icon.attached? %>
+                    <img src="<%= url_for(@post.user.icon) %>" alt="ユーザーアイコン">
+                  <% else %>
+                    <%= image_tag('dummy.jpg', alt: 'ユーザーアイコン', class: 'w-8 h-8 rounded-full') %>
+                  <% end %>
+                </div>
+                <div class="ml-2">
+                  <p class="font-semibold text-gray-900"><%= @post.user.name %></p>
+                  <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt w-3 h-3 mr-1"></i>
+                    <span class="whitespace-nowrap"><%= @post.user.residence %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 投稿コメント部分 -->
+      <!-- 投稿の本文 -->
       <p class="mb-8 leading-relaxed text-gray-500">
-        <!-- 投稿コメントを表示 -->
         <%= @post.body %>
       </p>
-      
-      <div class="flex justify-center">
-        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
-        <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
-      </div>
     </div>
   </div>
 </section>

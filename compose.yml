@@ -31,6 +31,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development                                       # 環境変数の設定 (開発環境)
+      DATABASE_HOST: db
     env_file:
       - .env
     ports:
