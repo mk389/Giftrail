@@ -1,9 +1,9 @@
 <div class="hero bg-base-200 min-h-screen flex items-center justify-center">
-  <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
+  <div class="card bg-base-100 max-w-md w-full shrink-0 shadow-2xl">
     <div class="text-center mb-4" style="margin-top: 40px;">
       <h1 class="text-4xl font-bold py-6">ログイン</h1>
     </div>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'card-body' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'card-body p-4' }) do |f| %>
       <% if resource.errors.any? %>
         <div id="error_explanation" class="alert alert-error mb-4">
           <ul>
@@ -50,5 +50,3 @@
     <% end %>
   </div>
 </div>
-
-<i class="fas fa-user"></i>
