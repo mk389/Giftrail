@@ -1,3 +1,5 @@
+<!-- app/views/devise/registrations/new.html.erb -->
+
 <div class="hero bg-base-200 min-h-screen flex items-center justify-center">
   <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
     <div class="text-center mb-4" style="margin-top: 40px;">
@@ -38,15 +40,15 @@
 
       <!-- 居住地 -->
       <div class="form-control mb-4">
-        <label class="label" for="post_location">
+        <label class="label" for="user_residence">
           <span class="label-text">居住地</span>
         </label>
         <div class="flex items-center">
           <i class="fas fa-map-marker-alt mr-4"></i>
           <%= f.select :residence,
-          options_for_select(@residence.present? ? @residence.map { |entry| [entry[:name], entry[:name]] } : []),
-          { prompt: "居住地を選択" },
-          class: "select select-bordered w-full", required: true %>
+            options_for_select(@residence.present? ? @residence.map { |entry| [entry[:name], entry[:name]] } : []),
+            { prompt: "居住地を選択" },
+            class: "select select-bordered w-full", required: true %>
         </div>
       </div>
 
@@ -74,7 +76,7 @@
 
       <!-- プロフィール画像 -->
       <div class="form-control mb-4">
-        <label class="label w-full" for="user_board_image">
+        <label class="label w-full" for="user_icon">
           <span class="label-text">プロフィール画像</span>
         </label>
         <div class="flex items-center w-full">
