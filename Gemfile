@@ -7,10 +7,12 @@ gem "devise"
 gem "rails-i18n"
 gem 'devise-i18n'
 gem "image_processing", ">= 1.2"
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', '~> 1.48'
 gem 'fog-aws'
 gem "importmap-rails"
-gem 'mini_magick'
+gem 'dotenv-rails'
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick', '~> 4.9'
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

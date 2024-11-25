@@ -11,21 +11,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    if current_user.nil?
-      flash[:alert] = 'ログインしてください。'
-      redirect_to new_post_path
-      return
-    end
-
     @post = current_user.posts.build(post_params)
-
-    # ActiveStorageに添付
-    if params[:post][:images].present?
-      params[:post][:images].each do |image|
-        @post.images.attach(image)
-      end
-    end
-
+    @post = Post.new(post_params)
     if @post.save
       flash[:notice] = '投稿が作成されました！'
       redirect_to @post  # 投稿が作成された後に投稿詳細ページにリダイレクト
