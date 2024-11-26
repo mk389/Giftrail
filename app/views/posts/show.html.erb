@@ -2,12 +2,12 @@
   <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-start">
     <!-- 画像スライダー -->
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-      <% if @post.images.attached? %>
+      <% if @post.images.present? %>
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <% @post.images.each do |image| %>
               <div class="swiper-slide">
-                <img class="object-cover object-center w-full h-full rounded aspect-w-1 aspect-h-1" alt="投稿画像" src="<%= url_for(image) %>">
+              <img class="object-cover object-center w-full h-full rounded aspect-w-1 aspect-h-1" alt="投稿画像" src="<%= image.url %>">
               </div>
             <% end %>
           </div>
@@ -50,7 +50,7 @@
             <div class="flex items-center ml-auto space-x-4">
               <div class="flex items-center">
                 <div class="avatar w-8 h-8 rounded-full overflow-hidden">
-                  <% if @post.user.icon.attached? %>
+                  <% if @post.user.icon.present? %>
                     <img src="<%= url_for(@post.user.icon) %>" alt="ユーザーアイコン">
                   <% else %>
                     <%= image_tag('dummy.jpg', alt: 'ユーザーアイコン', class: 'w-8 h-8 rounded-full') %>

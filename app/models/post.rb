@@ -4,5 +4,5 @@ class Post < ApplicationRecord
 # バリデーション（必要に応じて追加）
   validates :title, presence: true
   validates :production_area, presence: true
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 end
