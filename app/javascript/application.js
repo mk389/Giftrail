@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import { Application } from "@hotwired/stimulus"
 import "./controllers"
 import Swiper from "swiper"
+import "swiper/css";
 
 // Stimulusの設定
 const application = Application.start()
@@ -13,32 +14,18 @@ window.Stimulus = application
 
 export { application }
 
-document.addEventListener('turbo:load', () => {
-  const swiperElements = document.querySelectorAll('.swiper-container'); // swiper要素を取得
-
-  swiperElements.forEach((swiperElement, index) => {
-    const swiper = new Swiper(swiperElement, {
-      direction: 'horizontal', // 水平方向スライド
-      loop: true,              // ループ設定
-      slidesPerView: 1,        // 1枚ずつ表示
-      spaceBetween: 10,        // スライド間のスペース（調整可能）
-
-      // ページネーション
-      pagination: {
-        el: `.swiper-pagination-${index}`,  // インデックスを使って個別に設定
-        clickable: true,
-      },
-
-      // ナビゲーションボタン
-      navigation: {
-        nextEl: `.swiper-button-next-${index}`,  // インデックスを使って個別に設定
-        prevEl: `.swiper-button-prev-${index}`,  // インデックスを使って個別に設定
-      },
-
-      // スクロールバー（必要なら）
-      scrollbar: {
-        el: `.swiper-scrollbar-${index}`,  // インデックスを使って個別に設定
-      },
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,   // 1枚ずつ表示
+    spaceBetween: 10,    // スライド間の余白
+    navigation: {        // ナビゲーションボタン
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {        // ページネーション
+      el: '.swiper-pagination',
+      clickable: true,   // クリック可能に
+    },
+    loop: true,          // ループさせる
   });
 });

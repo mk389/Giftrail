@@ -42,7 +42,8 @@
           <!-- 投稿タイトルとユーザー情報 -->
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4">
-              <h1 class="title-font sm:text-4xl text-3xl font-medium text-gray-900">
+              <!-- タイトルサイズ変更 -->
+              <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900">
                 <span class="font-bold"><%= @post.title %></span>
               </h1>
             </div>
@@ -66,5 +67,12 @@
               </div>
             </div>
           </div>
-     
-
+        </div>
+      </div>
+      
+      <p class="mb-8 leading-relaxed text-lg text-gray-500">
+        <%= @post.body %>
+      </p>
+    </div>
+  </div>
+</section>
