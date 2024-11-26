@@ -58,19 +58,14 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <% if @posts.present? %>  <!-- @postsが空でない場合にのみループを実行 -->
                     <% @posts.each do |post| %> 
-                        <div class="relative group overflow-hidden">
+                        <div class="relative overflow-hidden">
                             <!-- 画像をリンクで囲んで投稿詳細ページに飛ぶ -->
                             <a href="<%= post_path(post) %>" class="block">
                               <img src="<%= post.images.any? ? post.images.first.thumb.url : '/placeholder.svg?height=300&width=300' %>" 
                                 alt="投稿画像<%= post.id %>"
-                                class="w-full h-auto object-cover aspect-square transition-transform duration-300 group-hover:scale-110" 
+                                class="w-full h-auto object-cover aspect-square" 
                                 loading="lazy" />
                             </a>
-                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div class="text-white text-center">
-                                    <!-- ここにいいね数やコメント数などを追加予定ではあります -->
-                                </div>
-                            </div>
                         </div>
                     <% end %>
                 <% else %>

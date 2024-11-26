@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = '投稿が作成されました！'
-      redirect_to @post  # 投稿が作成された後に投稿詳細ページにリダイレクト
+      redirect_to @post
     else
       flash.now[:alert] = '投稿に失敗しました。'
       render :new
@@ -22,20 +22,28 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])  # params[:id] で指定された投稿を取得
+    @post = Post.find_by(id: params[:id])
+    if @post.nil?
+      flash[:alert] = '投稿が見つかりませんでした。'
+      redirect_to posts_path
+    end
   end
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    if @post
+  
+    if @post && @post.user == current_user
       @post.destroy
       flash[:notice] = '投稿が削除されました。'
-    else
+    elsif @post.nil?
       flash[:alert] = '投稿が見つかりませんでした。'
+    else
+      flash[:alert] = '自分の投稿のみ削除できます。'
     end
-    redirect_to posts_path
-  end
   
+    redirect_to posts_path
+  end  
+
 
   private
 
