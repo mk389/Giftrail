@@ -2,8 +2,6 @@ require 'carrierwave/storage/abstract'
 require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
-config.active_storage.service = :null
-
 CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage :fog
