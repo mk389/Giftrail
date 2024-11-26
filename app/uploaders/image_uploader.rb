@@ -30,7 +30,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   def convert_to_jpeg
     if file.extension.downcase == 'heic'
       manipulate! do |img|
-        img.format('jpg') { |i| i.quality(80) } # HEICをJPEGに変換
+        img.format('jpg') # HEICをJPEGに変換
         img
       end
     end
