@@ -27,7 +27,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   process :convert_to_jpeg
 
-  def convert_to_jpeg #jpegに変換
+  def convert_to_jpeg
     if file.extension.downcase == 'heic'
       manipulate! do |img|
         img.format('jpg') { |i| i.quality(80) } # HEICをJPEGに変換
@@ -43,9 +43,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [50, 50]
+    process resize_to_fit: [300, 300]
   end
-
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_allowlist
