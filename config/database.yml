@@ -13,8 +13,10 @@ development:
 test:
   <<: *default
   database: myapp_test
+
 production:
   <<: *default
-  database: myapp_production
-  username: myapp
+  database: giftrail-db
+  host: dpg-cs9qn9o8fa8c73cf8mgg-a
+  username: giftrail_db_user
   password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
