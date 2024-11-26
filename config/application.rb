@@ -12,7 +12,8 @@ module Myapp
     #config.active_storage.disabled = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
-
+    
+    config.active_storage.enabled = false
     config.active_storage.service = :null
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
