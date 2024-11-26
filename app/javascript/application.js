@@ -14,12 +14,14 @@ window.Stimulus = application
 export { application }
 
 document.addEventListener('turbo:load', () => {
-  const swiperElements = document.querySelectorAll('.swiper'); // swiper要素を取得
+  const swiperElements = document.querySelectorAll('.swiper-container'); // swiper要素を取得
 
   swiperElements.forEach((swiperElement, index) => {
     const swiper = new Swiper(swiperElement, {
       direction: 'horizontal', // 水平方向スライド
       loop: true,              // ループ設定
+      slidesPerView: 1,        // 1枚ずつ表示
+      spaceBetween: 10,        // スライド間のスペース（調整可能）
 
       // ページネーション
       pagination: {
