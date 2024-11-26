@@ -12,7 +12,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    @post = Post.new(post_params)
     if @post.save
       flash[:notice] = '投稿が作成されました！'
       redirect_to @post  # 投稿が作成された後に投稿詳細ページにリダイレクト

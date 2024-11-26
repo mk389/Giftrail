@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
@@ -12,9 +12,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  #def store_dir
-   # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  #end
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -25,6 +25,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
+  process :convert_to_jpeg
+
+  def convert_to_jpeg #jpegに変換
+    if file.extension.downcase == 'heic'
+      manipulate! do |img|
+        img.format('jpg') { |i| i.quality(80) } # HEICをJPEGに変換
+        img
+      end
+    end
+  end
   # process scale: [200, 300]
   #
   # def scale(width, height)
