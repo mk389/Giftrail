@@ -10,7 +10,7 @@ gem "image_processing", ">= 1.2"
 gem 'aws-sdk-s3', '~> 1.48'
 gem 'fog-aws'
 gem "importmap-rails"
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails'
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.9'
 
