@@ -7,7 +7,7 @@
           <div class="swiper-wrapper">
             <% @post.images.each do |image| %>
               <div class="swiper-slide">
-              <img class="object-cover object-center w-full h-full rounded aspect-w-1 aspect-h-1" alt="投稿画像" src="<%= image.url %>">
+                <img class="object-cover object-center w-full h-full rounded aspect-w-1 aspect-h-1" alt="投稿画像" src="<%= image.url %>">
               </div>
             <% end %>
           </div>
