@@ -13,6 +13,7 @@ module Myapp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
     
+    config.active_storage.draw_routes = false
     config.active_storage.enabled = false
     config.active_storage.service = :null
 

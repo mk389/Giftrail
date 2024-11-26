@@ -2,21 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 @import 'swiper/swiper-bundle.min.css';
-
-.swiper-container {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .swiper-wrapper {
-    display: flex; /* 横並びにする */
-    justify-content: center; /* スライドの中央揃え */
-  }
-  
-  .swiper-slide {
-    width: 100%;  /* 横幅を100%に設定 */
-    height: 100%; /* 高さを100%に設定 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
