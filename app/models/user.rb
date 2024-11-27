@@ -12,8 +12,14 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "は有効なメールアドレスではありません" }
   validates :residence, presence: true
   validates :password, presence: true, length: { minimum: 6, message: "は6文字以上で入力してください" }
+  
+  before_destroy :remove_icon
 
   private
+
+  def remove_icon
+    icon.remove! if icon.present?
+  end
 
   def password_confirmation_matches
     if password != password_confirmation
