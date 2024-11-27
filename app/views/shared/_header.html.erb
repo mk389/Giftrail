@@ -1,36 +1,42 @@
-<div class="navbar justify-start">
+<div class="navbar bg-base-200 p-4">
   <div class="flex-1">
     <%= link_to 'Giftrail', root_path, class: 'btn btn-ghost text-3xl px-6' %>
   </div>
 
-  <div class="flex-none mr-4">
-    <ul class="menu menu-horizontal px-1">
-      <% if user_signed_in? %> <!-- ログインしている場合 -->
-        <li>
-          <details class="relative">
-            <summary class="font-semibold">メニュー</summary>
-            <ul class="bg-base-100 rounded-t-none p-2 absolute left-0 mt-1">
-              <li><%= link_to '投稿作成', new_post_path, class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to '投稿一覧', posts_path, class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to 'お問い合わせ', '#', class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to '利用規約', '#', class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-ghost px-2 py-2' %></li>
-            </ul>
-          </details>
-        </li>
-      <% else %> <!-- ログインしていない場合 -->
-        <li><%= link_to 'ログイン', new_user_session_path, class: 'font-semibold' %></li>
-        <li>
-          <details class="relative">
-            <summary class="font-semibold">メニュー</summary>
-            <ul class="bg-base-100 rounded-t-none p-2 absolute left-0 mt-1">
-              <li><%= link_to '投稿一覧', posts_path, class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to 'お問い合わせ', '#', class: 'btn btn-ghost px-2 py-2' %></li>
-              <li><%= link_to '利用規約', '#', class: 'btn btn-ghost px-2 py-2' %></li>
-            </ul>
-          </details>
-        </li>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal hidden lg:flex px-1">
+      <% if user_signed_in? %>
+        <li><%= link_to '投稿作成', new_post_path, class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to '投稿一覧', posts_path, class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to 'お問い合わせ', '#', class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to '利用規約', '#', class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-ghost px-4' %></li>
+      <% else %>
+        <li><%= link_to 'ログイン', new_user_session_path, class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to '投稿一覧', posts_path, class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to 'お問い合わせ', '#', class: 'btn btn-ghost px-4' %></li>
+        <li><%= link_to '利用規約', '#', class: 'btn btn-ghost px-4' %></li>
       <% end %>
     </ul>
+
+    <div class="dropdown lg:hidden">
+      <label tabindex="0" class="btn btn-ghost">
+        <i class="fas fa-bars text-xl"></i>
+      </label>
+      <ul tabindex="0" class="dropdown-content bg-base-100 rounded-box w-52 p-2 shadow">
+        <% if user_signed_in? %>
+          <li><%= link_to '投稿作成', new_post_path %></li>
+          <li><%= link_to '投稿一覧', posts_path %></li>
+          <li><%= link_to 'お問い合わせ', '#' %></li>
+          <li><%= link_to '利用規約', '#' %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <li><%= link_to '投稿一覧', posts_path %></li>
+          <li><%= link_to 'お問い合わせ', '#' %></li>
+          <li><%= link_to '利用規約', '#' %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
