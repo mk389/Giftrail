@@ -28,45 +28,56 @@
       <div class="relative mb-4 w-full">
         <div class="flex flex-col">
           <div class="flex justify-end space-x-4 mb-2">
-            <!-- 編集ボタン -->
-            <%= button_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
-              <i class="fas fa-edit text-gray-900"></i>
-            <% end %>
+            <!-- 投稿者がログインしている場合のみ編集・削除ボタンを表示 -->
+            <% if @post.user == current_user %>
+              <!-- 編集ボタン -->
+              <%= button_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
+                <i class="fas fa-edit text-gray-900"></i>
+              <% end %>
 
-            <!-- 削除ボタン（アイコン付き） -->
-            <%= button_to post_path(@post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-ghost btn-circle text-red-500' do %>
-              <i class="fas fa-trash-alt"></i>
+              <%= button_to post_path(@post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-ghost btn-circle text-red-500' do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
             <% end %>
           </div>
 
           <!-- 投稿タイトルとユーザー情報 -->
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4">
-              <!-- タイトルサイズ変更 -->
               <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900">
                 <span class="font-bold"><%= @post.title %></span>
               </h1>
             </div>
 
             <div class="flex items-center ml-auto space-x-4">
-              <div class="flex items-center">
-                <div class="avatar w-8 h-8 rounded-full overflow-hidden">
-                  <% if @post.user.icon.present? %>
-                    <img src="<%= @post.user.icon.url %>" alt="ユーザーアイコン">
-                  <% else %>
-                    <%= image_tag('dummy.jpg', alt: 'ユーザーアイコン', class: 'w-8 h-8 rounded-full') %>
-                  <% end %>
-                </div>
-                <div class="ml-2">
-                  <p class="font-semibold text-gray-900"><%= @post.user.name %></p>
-                  <div class="flex items-center">
-                    <i class="fas fa-map-marker-alt w-3 h-3 mr-1"></i>
-                    <span class="whitespace-nowrap"><%= @post.user.residence %></span>
-                  </div>
+              <!-- ユーザーアイコンのサイズを8に変更 -->
+              <div class="avatar w-8 h-8 rounded-full overflow-hidden">
+                <% if @post.user.icon.present? %>
+                  <img src="<%= @post.user.icon.url %>" alt="ユーザーアイコン">
+                <% else %>
+                  <%= image_tag('dummy.jpg', alt: 'ユーザーアイコン', class: 'w-8 h-8 rounded-full') %>
+                <% end %>
+              </div>
+              <div class="ml-4">
+                <p class="font-semibold text-gray-900"><%= @post.user.name %></p>
+                <div class="flex items-center">
+                  <span class="whitespace-nowrap"><%= @post.user.residence %></span>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- 日付 -->
+          <div class="mt-2 text-sm text-gray-900">
+            <%= @post.created_at.strftime('%Y/%m/%d') %>
+          </div>
+
+          <% if @post.production_area.present? %>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-map-marker-alt w-3 h-3 mr-1"></i>
+              <span><%= @post.production_area %></span>
+            </div>
+          <% end %>
         </div>
       </div>
       

@@ -35,10 +35,6 @@ class PostsController < ApplicationController
     if @post && @post.user == current_user
       @post.destroy
       flash[:notice] = '投稿が削除されました。'
-    elsif @post.nil?
-      flash[:alert] = '投稿が見つかりませんでした。'
-    else
-      flash[:alert] = '自分の投稿のみ削除できます。'
     end
   
     redirect_to posts_path
