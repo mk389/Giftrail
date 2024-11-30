@@ -1,77 +1,87 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="flex flex-col md:flex-row gap-8">
-    <div class="md:w-1/4">
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">人気のタグ</h2>
-          <div class="flex flex-wrap gap-2">
-            <span class="badge">#まだ</span>
-            <span class="badge">#実装</span>
-            <span class="badge">#できていません</span>
-            <span class="badge">#チョコレート</span>
-            <span class="badge">#お土産</span>
-            <span class="badge">#手土産</span>
-            <span class="badge">#クッキー</span>
-            <span class="badge">#煎餅</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- メインコンテンツ -->
-    <div class="md:w-3/4">
-      <form class="mb-8">
-        <div class="flex flex-col md:flex-row gap-4">
-          <!-- 検索ボックス -->
-          <div class="form-control flex-grow">
-            <div class="input-group flex-nowrap w-full">
-              <input type="text" placeholder="検索..." class="input input-bordered flex-grow w-4/5" />
-              <button class="btn btn-square">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
+<body class="min-h-screen flex flex-col">
+  <!-- コンテンツエリア -->
+  <div class="flex-grow">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/4">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">人気のタグ</h2>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge">#まだ</span>
+                <span class="badge">#実装</span>
+                <span class="badge">#できていません</span>
+                <span class="badge">#チョコレート</span>
+                <span class="badge">#お土産</span>
+                <span class="badge">#手土産</span>
+                <span class="badge">#クッキー</span>
+                <span class="badge">#煎餅</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- 「絞り込み」のラベル -->
-        <div class="mt-4">
-          <span class="text-lg font-semibold">絞り込み検索</span>
-        </div>
+        <div class="md:w-3/4">
+          <form class="mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+              <div class="form-control flex-grow">
+                <div class="input-group flex-nowrap w-full">
+                  <input type="text" placeholder="検索..." class="input input-bordered flex-grow w-4/5" />
+                  <button class="btn btn-square">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-        <!-- 都道府県セレクトボックス -->
-        <div class="mt-2 flex flex-col md:flex-row gap-4">
-          <div class="form-control flex-grow">
-            <select class="select select-bordered w-1/4">
-              <option disabled selected>都道府県</option>
-              <% prefectures_and_countries.each do |location| %>
-                <option><%= location[:name] %></option>
+            <div class="mt-4">
+              <span class="text-lg font-semibold">絞り込み検索</span>
+            </div>
+
+            <div class="mt-2 flex flex-col md:flex-row gap-4">
+              <div class="form-control flex-grow">
+                <select class="select select-bordered w-1/4">
+                  <option disabled selected>都道府県</option>
+                  <% prefectures_and_countries.each do |location| %>
+                    <option><%= location[:name] %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <% if @posts.present? %>
+              <% @posts.each do |post| %> 
+                <div class="relative overflow-hidden">
+                  <a href="<%= post_path(post) %>" class="block">
+                    <% if post.images.present? %>
+                      <img class="object-cover w-full h-full rounded" style="aspect-ratio: 1;" alt="投稿画像" src="<%= post.images.first.url %>">
+                    <% else %>
+                      <img class="object-cover object-center rounded w-full h-full" alt="投稿画像" src="https://dummyimage.com/720x600">
+                    <% end %>
+                  </a>
+                </div>
               <% end %>
-            </select>
+            <% else %>
+              <p class="text-center text-gray-500">現在、投稿はありません。</p>
+            <% end %>
           </div>
         </div>
-      </form>
-
-      <!-- 画像グリッド -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <% if @posts.present? %>  <!-- @postsが空でない場合にのみループを実行 -->
-          <% @posts.each do |post| %> 
-            <div class="relative overflow-hidden">
-              <a href="<%= post_path(post) %>" class="block">
-                <% if post.images.present? %>
-                  <img class="object-cover w-full h-full rounded" style="aspect-ratio: 1;" alt="投稿画像" src="<%= post.images.first.url %>">
-                <% else %>
-                  <!-- 画像がない場合はダミー画像を表示 -->
-                  <img class="object-cover object-center rounded w-full h-full" alt="投稿画像" src="https://dummyimage.com/720x600">
-                <% end %>
-              </a>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="text-center text-gray-500">現在、投稿はありません。</p>
-        <% end %>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- フッター -->
+  <footer id="footer" class="footer-bottom py-4 bg-gray-800 text-white">
+    <div class="container mx-auto">
+      <div class="flex justify-center">
+        <div class="text-center">
+          <p>Copyright © 2024. Giftrail</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
