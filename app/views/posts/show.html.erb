@@ -3,7 +3,7 @@
     <!-- 画像スライダー -->
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
       <% if @post.images.present? %>
-        <div class="swiper-container">
+        <div class="swiper swiper-main">
           <div class="swiper-wrapper">
             <% @post.images.each do |image| %>
               <div class="swiper-slide">
@@ -25,23 +25,10 @@
 
     <!-- 投稿の詳細部分 -->
     <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+      <!-- 投稿内容 -->
       <div class="relative mb-4 w-full">
         <div class="flex flex-col">
-          <div class="flex justify-end space-x-4 mb-2">
-            <!-- 投稿者がログインしている場合のみ編集・削除ボタンを表示 -->
-            <% if @post.user == current_user %>
-              <!-- 編集ボタン -->
-              <%= button_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
-                <i class="fas fa-edit text-gray-900"></i>
-              <% end %>
-
-              <%= button_to post_path(@post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-ghost btn-circle text-red-500' do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
-            <% end %>
-          </div>
-
-          <!-- 投稿タイトルとユーザー情報 -->
+          <!-- 他の投稿情報 -->
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4">
               <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900">
@@ -50,7 +37,7 @@
             </div>
 
             <div class="flex items-center ml-auto space-x-4">
-              <!-- ユーザーアイコンのサイズを8に変更 -->
+              <!-- ユーザーアイコン -->
               <div class="avatar w-8 h-8 rounded-full overflow-hidden">
                 <% if @post.user.icon.present? %>
                   <img src="<%= @post.user.icon.url %>" alt="ユーザーアイコン">
@@ -67,7 +54,6 @@
             </div>
           </div>
 
-          <!-- 日付 -->
           <div class="mt-2 text-sm text-gray-900">
             <%= @post.created_at.strftime('%Y/%m/%d') %>
           </div>
@@ -87,3 +73,22 @@
     </div>
   </div>
 </section>
+
+<!-- Swiperのスクリプトを追加 -->
+<script>
+  window.onload = function() {
+    const swiper_main = new Swiper('.swiper-main', {
+      spaceBetween: 10,
+      slidesPerView: 1,
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  };
+</script>

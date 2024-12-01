@@ -56,13 +56,11 @@
           <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <% if @posts.present? %>
               <% @posts.each do |post| %>
-                <div class="relative overflow-hidden group"> <!-- group クラスを追加 -->
+                <div class="relative overflow-hidden group">
                   <a href="<%= post_path(post) %>" class="block">
                     <% if post.images.present? %>
-                      <!-- 画像にホバー効果を追加 -->
                       <img class="object-cover w-full h-full rounded transition duration-200 group-hover:scale-110" style="aspect-ratio: 1;" alt="投稿画像" src="<%= post.images.first.url %>">
                     <% else %>
-                      <!-- ダミー画像にもホバー効果を追加 -->
                       <img class="object-cover object-center rounded w-full h-full transition duration-200 group-hover:scale-110" alt="投稿画像" src="https://dummyimage.com/720x600">
                     <% end %>
                   </a>
