@@ -11,7 +11,7 @@ gem 'aws-sdk-s3', '~> 1.48'
 gem 'fog-aws'
 gem "importmap-rails"
 gem 'dotenv-rails'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 3.0'
 gem 'mini_magick', '~> 4.9'
 
 
