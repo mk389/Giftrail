@@ -26,12 +26,13 @@ services:
       - .:/myapp
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
-      - ./config/credentials.yml.enc:/myapp/config/credentials.yml.enc  # 追加: credentialsファイルのマウント
+      - ./config/credentials.yml.enc:/myapp/config/credentials.yml.enc
       - ./config/master.key:/myapp/config/master.key
     environment:
       TZ: Asia/Tokyo
-      RAILS_ENV: development                                       # 環境変数の設定 (開発環境)
+      RAILS_ENV: development
       DATABASE_HOST: db
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     env_file:
       - .env
     ports:
@@ -39,7 +40,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      chrome:
+        condition: service_healthy
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - 4444:4444
 volumes:
-  bundle_data: {}
-  postgresql_data: {}
-  node_modules: {}
+  bundle_data:
+  postgresql_data:
+  node_modules:
