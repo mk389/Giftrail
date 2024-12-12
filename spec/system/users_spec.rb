@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User", type: :system do
+RSpec.describe "ユーザー管理", type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let(:valid_attributes) do
     {
