@@ -7,7 +7,7 @@ ja:
     failure:
       already_authenticated: "すでにログインしています。"
       inactive: "アカウアカウントが有効ではありません。"
-      invalid: "無効な認証情報です。"
+      invalid: "認証情報に誤りがあります。"
       locked: "アカウントはロックされています。"
       last_attempt: "アカウントがロックされる前に、あと1回の試行があります。"
       not_found_in_database: "ログインできませんでした。メールアドレスとパスワードを再確認してください。"
@@ -35,9 +35,9 @@ ja:
       updated: "パスワードが変更されました。"
       updated_not_active: "パスワードが変更されました。"
     registrations:
-      destroyed: "アカウントが登録がキャンセルされました。またのご利用をお待ちしています。"
+      destroyed: "アカウントが登録がキャンセルされました。"
       signed_up: "アカウント登録が完了しました。"
-      failure: "アカウントの登録に失敗しました。入力内容を確認してください。"
+      failure: "アカウントの登録に失敗しました。"
       signed_up_but_inactive: "サインアップに成功しましたが、アカウントがまだアクティベートされていないため、サインインできません。"
       signed_up_but_locked: "サインアップに成功しましたが、アカウントがロックされているため、サインインできません。"
       signed_up_but_unconfirmed: "確認メールが送信されました。リンクからアクセスしてください。"

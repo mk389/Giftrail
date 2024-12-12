@@ -35,7 +35,7 @@
               <% end %>
 
               <!-- 削除ボタン（現在のユーザーが投稿の所有者の場合のみ表示） -->
-              <%= button_to post_path(@post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-ghost btn-circle text-red-500' do %>
+              <%= button_to post_path(@post), method: :delete, class: 'btn btn-ghost btn-circle text-red-500' do %>
                 <i class="fas fa-trash-alt"></i>
               <% end %>
             <% end %>
