@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
+    <title><%= content_for(:title) || "Giftrail" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <link rel="icon" href="<%= asset_path('favicon.ico') %>" type="image/x-icon">
 
     <%= yield :head %>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8.4.6/swiper-bundle.min.css" />
