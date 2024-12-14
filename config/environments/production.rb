@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.hosts << 'giftrail.net'
+  config.hosts << 'www.giftrail.net'
   # Code is not reloaded between requests.
   config.log_level = :debug
   config.enable_reloading = false
