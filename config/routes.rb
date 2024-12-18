@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  devise_for :users, controllers: { registrations: 'users/registrations' }
-
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   root 'home#index'
   resources :posts
 end
