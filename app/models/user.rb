@@ -20,11 +20,13 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.residence ||= '不明'
 
+      user.skip_confirmation!
+
       if user.save
         user
       else
         user.errors.full_messages.each do |message|
-          Rails.logger.error message  # ログにもエラーメッセージを出力
+          Rails.logger.error message
         end
         raise StandardError, "User could not be saved: #{user.errors.full_messages.join(", ")}"
       end
