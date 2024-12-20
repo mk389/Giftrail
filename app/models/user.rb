@@ -13,31 +13,20 @@ class User < ApplicationRecord
   validates :uid, presence: true, uniqueness: { scope: :provider }
 
   def self.from_omniauth(auth)
-    user = find_by(provider: auth.provider, uid: auth.uid)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.icon = auth.info.image
+      user.password = Devise.friendly_token[0, 20]
+      user.residence ||= '不明'
 
-    if user
-      user
-    else
-      user = find_by(email: auth.info.email)
-      if user
-        user.update(provider: auth.provider, uid: auth.uid)
+      if user.save
         user
       else
-        base_username = auth.info.name.parameterize
-        unique_username = base_username
-        counter = 1
-        while User.exists?(username: unique_username)
-          unique_username = "#{base_username}#{counter}"
-          counter += 1
+        user.errors.full_messages.each do |message|
+          Rails.logger.error message  # ログにもエラーメッセージを出力
         end
-
-        create(
-          email: auth.info.email,
-          username: unique_username,
-          password: Devise.friendly_token[0, 20],
-          provider: auth.provider,
-          uid: auth.uid,
-        )
+        raise StandardError, "User could not be saved: #{user.errors.full_messages.join(", ")}"
       end
     end
   end
