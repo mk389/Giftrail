@@ -14,22 +14,12 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.name = auth.info.name
       user.email = auth.info.email
+      user.name = auth.info.name
+      user.password = Devise.friendly_token[0,20]
       user.icon = auth.info.image
-      user.password = Devise.friendly_token[0, 20]
       user.residence ||= '不明'
-
       user.skip_confirmation!
-
-      if user.save
-        user
-      else
-        user.errors.full_messages.each do |message|
-          Rails.logger.error message
-        end
-        raise StandardError, "User could not be saved: #{user.errors.full_messages.join(", ")}"
-      end
     end
   end
 end
