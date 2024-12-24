@@ -15,6 +15,13 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  
+  get 'posts/autocomplete', to: 'posts#autocomplete', as: 'autocomplete_posts'
+
   root 'home#index'
-  resources :posts
+  resources :posts do
+    collection do
+      get :autocomplete  # autocompleteアクションを定義
+    end
+  end
 end

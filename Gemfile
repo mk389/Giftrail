@@ -15,6 +15,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.9'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'ransack'
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

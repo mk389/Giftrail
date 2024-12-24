@@ -2,7 +2,24 @@ class PostsController < ApplicationController
   include LocationHelper
 
   def index
+    @query = params[:query]
+    @production_area = prefectures_and_countries
+
+    # 最初に全投稿を取得
     @posts = Post.all
+
+    # フリーワード検索（タイトルと本文に対して検索）
+    if @query.present?
+      @posts = @posts.where('title LIKE :query OR body LIKE :query', query: "%#{@query}%")
+    end
+
+    # 絞り込み検索（production_areaに対して検索）
+    if params[:production_area_eq].present?
+      @posts = @posts.where(production_area: params[:production_area_eq])
+    end
+
+    # 投稿を作成日順でソート
+    @posts = @posts.order(created_at: :desc)
   end
   
   def new
@@ -40,6 +57,13 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end  
 
+  def autocomplete
+    query = params[:query]
+    @posts = Post.where("title LIKE ?", "%#{query}%")
+
+    # 必要な情報（タイトル、本文、産地）をJSON形式で返す
+    render json: @posts.map { |post| { title: post.title, body: post.body, production_area: post.production_area } }
+  end
 
   private
 
