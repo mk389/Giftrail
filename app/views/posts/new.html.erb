@@ -45,7 +45,7 @@
           <i class="fas fa-map-marker-alt mr-4"></i>
           <%= f.select :production_area,
             options_for_select(@production_area.map { |entry| [entry[:name], entry[:name]] }),
-            { prompt: "地域を選んでください" },
+            { prompt: "都道府県または国名を選んでください" },
             class: "select select-bordered w-full", required: true %>
         </div>
       </div>
