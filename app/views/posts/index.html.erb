@@ -1,8 +1,9 @@
 <body class="min-h-screen flex flex-col">
-  <!-- コンテンツエリア -->
   <div class="flex-grow">
     <div class="container mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row gap-8">
+        
+        <!-- サイドバー -->
         <div class="md:w-1/4">
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
@@ -21,36 +22,31 @@
           </div>
         </div>
 
+        <!-- メインコンテンツ -->
         <div class="md:w-3/4">
-          <form class="mb-8">
-            <div class="flex flex-col md:flex-row gap-4">
-              <div class="form-control flex-grow">
-                <div class="input-group flex-nowrap w-full">
-                  <input type="text" placeholder="検索..." class="input input-bordered flex-grow w-4/5" />
-                  <button class="btn btn-square">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
-                </div>
+          <!-- 検索フォーム -->
+          <%= form_with url: posts_path, method: :get, local: true, class: "mb-8" do |f| %>
+            <div class="form-control flex-grow">
+              <div class="input-group flex-nowrap w-full">
+                <%= f.text_field :query, value: params[:query], placeholder: "検索...", class: "input input-bordered flex-grow w-4/5" %>
+                <button type="submit" class="btn btn-square">
+                  <i class="fas fa-search text-lg text-gray-600"></i> <!-- Font Awesome の虫眼鏡アイコン -->
+                </button>
               </div>
             </div>
-
+        
+            <!-- 絞り込み検索 -->
             <div class="mt-4">
               <span class="text-lg font-semibold">絞り込み検索</span>
             </div>
-
+        
+            <!-- Narrowing down the width of the select box -->
             <div class="mt-2 flex flex-col md:flex-row gap-4">
-              <div class="form-control flex-grow">
-                <select class="select select-bordered w-1/4">
-                  <option disabled selected>都道府県</option>
-                  <% prefectures_and_countries.each do |location| %>
-                    <option><%= location[:name] %></option>
-                  <% end %>
-                </select>
+              <div class="form-control w-1/4"> <!-- Adjust width to make the select box narrower -->
+                <%= f.select :production_area_eq, @production_area.map { |area| [area[:name], area[:name]] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
               </div>
             </div>
-          </form>
+          <% end %>
 
           <!-- 投稿画像を2列に変更 -->
           <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -67,7 +63,7 @@
                 </div>
               <% end %>
             <% else %>
-              <p class="text-center text-gray-500">現在、投稿はありません。</p>
+              <p class="text-center text-gray-500">投稿はありません。</p>
             <% end %>
           </div>
         </div>
@@ -75,3 +71,4 @@
     </div>
   </div>
 </body>
+
