@@ -26,25 +26,21 @@
         <div class="md:w-3/4">
           <!-- 検索フォーム -->
           <%= form_with url: posts_path, method: :get, local: true, class: "mb-8" do |f| %>
-            <div class="form-control flex-grow">
-              <div class="input-group flex-nowrap w-full">
-                <%= f.text_field :query, value: params[:query], placeholder: "検索...", class: "input input-bordered flex-grow w-4/5" %>
-                <button type="submit" class="btn btn-square">
-                  <i class="fas fa-search text-lg text-gray-600"></i> <!-- Font Awesome の虫眼鏡アイコン -->
-                </button>
+            <div class="flex flex-row gap-4 items-center">
+              <!-- フリーワード検索 -->
+              <div class="flex-1">
+                <%= f.text_field :query, value: params[:query], placeholder: "検索...", class: "input input-bordered w-full" %>
               </div>
-            </div>
-        
-            <!-- 絞り込み検索 -->
-            <div class="mt-4">
-              <span class="text-lg font-semibold">絞り込み検索</span>
-            </div>
-        
-            <!-- Narrowing down the width of the select box -->
-            <div class="mt-2 flex flex-col md:flex-row gap-4">
-              <div class="form-control w-1/4"> <!-- Adjust width to make the select box narrower -->
+
+              <!-- プルダウン -->
+              <div class="flex-none w-1/4">
                 <%= f.select :production_area_eq, @production_area.map { |area| [area[:name], area[:name]] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
               </div>
+
+              <!-- 虫眼鏡ボタン -->
+              <button type="submit" class="btn btn-square">
+                <i class="fas fa-search text-lg text-gray-600"></i> <!-- Font Awesome の虫眼鏡アイコン -->
+              </button>
             </div>
           <% end %>
 
@@ -71,4 +67,3 @@
     </div>
   </div>
 </body>
-
