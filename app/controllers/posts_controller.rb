@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include LocationHelper
+  POST_COUNT = 15
 
   def index
     @query = params[:query]
@@ -7,19 +8,16 @@ class PostsController < ApplicationController
 
     # 最初に全投稿を取得
     @posts = Post.all
-
     # フリーワード検索（タイトルと本文に対して検索）
     if @query.present?
       @posts = @posts.where('title LIKE :query OR body LIKE :query', query: "%#{@query}%")
     end
-
     # 絞り込み検索（production_areaに対して検索）
     if params[:production_area_eq].present?
       @posts = @posts.where(production_area: params[:production_area_eq])
     end
-
-    # 投稿を作成日順でソート
-    @posts = @posts.order(created_at: :desc)
+    
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(15)
   end
   
   def new
