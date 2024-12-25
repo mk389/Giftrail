@@ -1,0 +1,25 @@
+<div class="flex justify-center mt-4">
+  <nav class="flex items-center space-x-2">
+    <% if @posts.prev_page %>
+      <%= link_to "<i class='fas fa-angle-left'></i>".html_safe, url_for(page: @posts.prev_page), class: "btn btn-sm" %>
+    <% else %>
+      <span class="btn btn-sm disabled"><i class='fas fa-angle-left'></i></span>
+    <% end %>
+
+    <% (1..@posts.total_pages).each do |page_num| %>
+      <% if page_num == @posts.current_page %>
+        <span class="btn btn-sm btn-active"><%= page_num %></span>
+      <% else %>
+        <%= link_to page_num, url_for(page: page_num), class: "btn btn-sm" %>
+      <% end %>
+    <% end %>
+
+    <% if @posts.next_page %>
+      <%= link_to "<i class='fas fa-angle-right'></i>".html_safe, url_for(page: @posts.next_page), class: "btn btn-sm" %>
+    <% else %>
+      <span class="btn btn-sm disabled"><i class='fas fa-angle-right'></i></span>
+    <% end %>
+  </nav>
+</div>
+
+

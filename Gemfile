@@ -16,7 +16,7 @@ gem 'mini_magick', '~> 4.9'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'ransack'
-
+gem 'kaminari'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
