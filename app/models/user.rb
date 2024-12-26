@@ -18,46 +18,45 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     # provider と uid でユーザーを検索
     user = find_by(provider: auth.provider, uid: auth.uid)
-
+  
     if user
       # 既存のユーザーが見つかった場合、そのユーザーを返す
       user
     else
       # メールアドレスでユーザーを検索
       user = find_by(email: auth.info.email)
-
+  
       if user
         # 既存ユーザーに provider と uid を関連付け
         user.update(provider: auth.provider, uid: auth.uid)
         user
       else
-        # ユーザー名のユニーク性を確保
-        base_username = auth.info.name.parameterize
-        unique_username = base_username
+        # 新規ユーザーを作成
+        base_name = auth.info.name
+        unique_name = base_name
         counter = 1
-
-        # ユーザー名のユニーク性を確保するループ
-        while User.exists?(username: unique_username)
-          unique_username = "#{base_username}#{counter}"
+  
+        # nameのユニーク性を確保するループ
+        while User.exists?(name: unique_name)  # ここをnameカラムを使用
+          unique_name = "#{base_name}#{counter}"
           counter += 1
         end
-
+  
         # 新規ユーザーを作成
         user = create(
           email: auth.info.email,
-          name: unique_username,
-          icon: auth.info.image,
+          name: unique_name,  # nameを使用
+          icon: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'files', 'dummy2.jpg'), 'image/jpeg'),
           password: Devise.friendly_token[0, 20],
           provider: auth.provider,
           uid: auth.uid,
           residence: '不明'
         )
-
-        # ユーザー作成後、保存に成功した場合のみ返す
+  
+        # 保存に成功した場合のみユーザーを返す
         if user.persisted?
           user
         else
-          # 作成に失敗した場合、エラーメッセージを追加して返す
           user.errors.add(:base, "ユーザー作成に失敗しました")
           nil
         end

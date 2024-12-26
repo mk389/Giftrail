@@ -6,5 +6,8 @@ FactoryBot.define do
     password { "password123" }
     password_confirmation { "password123" }
     icon { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'files', 'dummy2.jpg'), 'image/jpeg') }
+
+    provider { "google_oauth2" }
+    uid { SecureRandom.uuid }  # 一意のUIDを生成
   end
 end

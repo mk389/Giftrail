@@ -38,4 +38,49 @@ RSpec.describe User, type: :model do
       expect(user.icon.url).to include('dummy2.jpg')
     end
   end
+
+  describe '.from_omniauth' do
+    let(:auth_data) do
+      OmniAuth::AuthHash.new({
+        provider: 'google_oauth2',
+        uid: '1234567890',
+        info: {
+          email: 'google_test@example.com',
+          name: 'Google User',  # nameはそのまま使用
+          image: 'http://example.com/google_user.png'
+        }
+      })
+    end
+
+    context '既存のユーザーがproviderとuidで存在する場合' do
+      let!(:existing_user) { create(:user, provider: 'google_oauth2', uid: '1234567890', email: 'google_test@example.com') }
+
+      it 'そのユーザーを返す' do
+        user = User.from_omniauth(auth_data)
+        expect(user).to eq(existing_user)
+      end
+    end
+
+    context '既存のユーザーがメールアドレスで存在し、providerとuidがない場合' do
+      let!(:existing_user) { create(:user, email: 'google_test@example.com', provider: nil, uid: nil) }
+
+      it '既存ユーザーを更新して返す' do
+        user = User.from_omniauth(auth_data)
+        expect(user).to eq(existing_user)
+        expect(user.provider).to eq('google_oauth2')
+        expect(user.uid).to eq('1234567890')
+      end
+    end
+
+    context '該当するユーザーが存在しない場合' do
+      it '新しいユーザーを作成する' do
+        expect {
+          user = User.from_omniauth(auth_data)
+          expect(user.name).to eq('Google User')  # 期待される名前がそのまま使用される
+          expect(user.icon).not_to be_nil
+          expect(user.icon.url).to include('dummy2.jpg')
+        }.to change { User.count }.by(1)
+      end
+    end
+  end
 end
