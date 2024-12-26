@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       @posts = @posts.where(production_area: params[:production_area_eq])
     end
     
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(15)
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(15)
   end
   
   def new
