@@ -36,6 +36,17 @@
         </div>
       </div>
 
+      <!-- タグ入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_tags">
+          <span class="label-text">タグ</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-tags mr-4"></i>
+          <%= f.text_field :tag_names, placeholder: "タグを入力（カンマ区切り）", class: "input input-bordered w-full" %>
+        </div>
+      </div>
+
       <!-- 都道府県または国名 -->
       <div class="form-control mb-4">
         <label class="label" for="post_location">
