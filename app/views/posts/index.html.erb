@@ -9,17 +9,12 @@
             <div class="card-body">
               <h2 class="card-title">人気のタグ</h2>
               <div class="flex flex-wrap gap-2">
-                <span class="badge transition duration-200 hover:bg-gray-300">#まだ</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#実装</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#できていません</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#チョコレート</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#お土産</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#手土産</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#クッキー</span>
-                <span class="badge transition duration-200 hover:bg-gray-300">#煎餅</span>
+                <% Tag.joins(:posts).group("tags.id").order("COUNT(posts.id) DESC").limit(15).each do |tag| %>
+                  <%= link_to "##{tag.name}", posts_path(tag: tag.name), class: "btn btn-primary" %>
+                <% end %>
               </div>
-            </div>
-          </div>
+           </div>
+         </div>
         </div>
 
         <!-- メインコンテンツ -->
@@ -34,7 +29,7 @@
 
               <!-- プルダウン -->
               <div class="flex-none w-1/4">
-                <%= f.select :production_area_eq, @production_area.map { |area| [area[:name], area[:name]] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
+                <%= f.select :production_area_eq, @production_area.map { |area| [area, area] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
               </div>
 
               <!-- 虫眼鏡ボタン -->
@@ -62,6 +57,7 @@
               <p class="text-center text-gray-500">投稿はありません。</p>
             <% end %>
           </div>
+
           <!-- ページネーション -->
           <% if @posts.total_pages > 1 %>
             <div class="mt-8">
@@ -73,4 +69,3 @@
     </div>
   </div>
 </body>
-

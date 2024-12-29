@@ -5,19 +5,29 @@ class PostsController < ApplicationController
   def index
     @query = params[:query]
     @production_area = prefectures_and_countries
-
+  
     # 最初に全投稿を取得
     @posts = Post.all
+  
     # フリーワード検索（タイトルと本文に対して検索）
     if @query.present?
       @posts = @posts.where('title LIKE :query OR body LIKE :query', query: "%#{@query}%")
     end
+  
     # 絞り込み検索（production_areaに対して検索）
     if params[:production_area_eq].present?
       @posts = @posts.where(production_area: params[:production_area_eq])
     end
-    
-    @posts = @posts.order(created_at: :desc).page(params[:page]).per(15)
+  
+    # タグによる絞り込み
+    if params[:tag].present?
+      # タグが存在すれば、そのタグに関連する投稿を取得
+      @tag = Tag.find_by(name: params[:tag])
+      @posts = @tag.posts if @tag
+    end
+  
+    # 投稿を作成日順に並べ、ページネーションを適用
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(POST_COUNT)
   end
   
   def new
@@ -27,6 +37,16 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+  
+    # タグ処理
+    if params[:post][:tag_names].present?
+      tags = params[:post][:tag_names].split(',').map(&:strip).uniq
+      tags.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        @post.tags << tag
+      end
+    end
+  
     if @post.save
       flash[:notice] = '投稿が作成されました！'
       redirect_to @post
@@ -70,6 +90,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :production_area, images: [])
+    params.require(:post).permit(:title, :body, :production_area, images: [], tag_names: [])
   end
 end
