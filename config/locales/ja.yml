@@ -3,6 +3,8 @@ ja:
     attributes:
       user:
         residence: "居住地"
+      post:
+        images: "画像"
   devise:
     registrations:
       user:

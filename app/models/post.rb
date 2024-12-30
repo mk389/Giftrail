@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :production_area, presence: true
+  validates :images, presence: true
+
   mount_uploaders :images, ImageUploader
   ransack_alias :prefecture_eq, :prefecture
 

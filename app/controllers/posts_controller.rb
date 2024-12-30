@@ -37,7 +37,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-  
+    @production_area = prefectures_and_countries
+    
     # タグ処理
     if params[:post][:tag_names].present?
       tags = params[:post][:tag_names].split(',').map(&:strip).uniq
