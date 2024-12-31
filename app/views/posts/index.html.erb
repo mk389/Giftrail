@@ -29,7 +29,7 @@
 
               <!-- プルダウン -->
               <div class="flex-none w-1/4">
-                <%= f.select :production_area_eq, @production_area.map { |area| [area, area] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
+                <%= f.select :production_area_eq, @production_area.map { |area| [area[:name], area[:name]] }, { include_blank: "選択なし" }, class: "select select-bordered w-full" %>
               </div>
 
               <!-- 虫眼鏡ボタン -->
@@ -57,7 +57,6 @@
               <p class="text-center text-gray-500">投稿はありません。</p>
             <% end %>
           </div>
-
           <!-- ページネーション -->
           <% if @posts.total_pages > 1 %>
             <div class="mt-8">
