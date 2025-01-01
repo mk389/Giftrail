@@ -24,10 +24,20 @@ RSpec.describe User, type: :model do
 
   describe '関連付け' do
     it 'ユーザーが削除されると、関連するポストも削除されること' do
+      # ユーザーとポストを作成
       user = create(:user)
       post1 = user.posts.create(title: 'ポスト1', production_area: '大阪')
       post2 = user.posts.create(title: 'ポスト2', production_area: '東京')
-      expect { user.destroy }.to change { Post.count }.by(-2)
+  
+      # ユーザー削除前にポストが2件存在することを確認
+      expect(Post.count).to eq(2)
+  
+      # ユーザーを削除
+      user.destroy
+  
+      # ユーザー削除後に関連するポストが削除されていることを確認
+      expect(Post.exists?(post1.id)).to eq(false)
+      expect(Post.exists?(post2.id)).to eq(false)
     end
   end
 

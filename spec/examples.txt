@@ -1,14 +1,19 @@
 example_id                           | status | run_time        |
 ------------------------------------ | ------ | --------------- |
-./spec/models/post_spec.rb[1:1:1]    | passed | 0.40877 seconds |
-./spec/models/user_spec.rb[1:1:1]    | passed | 0.40777 seconds |
-./spec/models/user_spec.rb[1:1:2]    | passed | 0.5326 seconds  |
-./spec/models/user_spec.rb[1:1:3]    | passed | 0.43732 seconds |
-./spec/models/user_spec.rb[1:2:1]    | passed | 0.46739 seconds |
-./spec/models/user_spec.rb[1:3:1]    | passed | 0.57203 seconds |
-./spec/models/user_spec.rb[1:4:1:1]  | passed | 0.42211 seconds |
-./spec/models/user_spec.rb[1:4:2:1]  | passed | 0.43277 seconds |
-./spec/models/user_spec.rb[1:4:3:1]  | passed | 0.43061 seconds |
-./spec/system/posts_spec.rb[1:1:1]   | passed | 1.77 seconds    |
-./spec/system/posts_spec.rb[1:1:2]   | passed | 1.32 seconds    |
-./spec/system/users_spec.rb[1:1:1:1] | passed | 2.26 seconds    |
+./spec/models/post_spec.rb[1:1:1]    | passed | 0.4416 seconds  |
+./spec/models/post_tag_spec.rb[1:1]  | passed | 0.0038 seconds  |
+./spec/models/post_tag_spec.rb[1:2]  | passed | 0.00377 seconds |
+./spec/models/post_tag_spec.rb[1:3]  | passed | 0.44149 seconds |
+./spec/models/tag_spec.rb[1:1]       | passed | 0.00255 seconds |
+./spec/models/tag_spec.rb[1:2]       | passed | 0.003 seconds   |
+./spec/models/user_spec.rb[1:1:1]    | passed | 0.36232 seconds |
+./spec/models/user_spec.rb[1:1:2]    | passed | 0.33754 seconds |
+./spec/models/user_spec.rb[1:1:3]    | passed | 0.35106 seconds |
+./spec/models/user_spec.rb[1:2:1]    | passed | 0.35279 seconds |
+./spec/models/user_spec.rb[1:3:1]    | passed | 0.34156 seconds |
+./spec/models/user_spec.rb[1:4:1:1]  | passed | 0.35352 seconds |
+./spec/models/user_spec.rb[1:4:2:1]  | passed | 0.34454 seconds |
+./spec/models/user_spec.rb[1:4:3:1]  | passed | 0.34873 seconds |
+./spec/system/posts_spec.rb[1:1:1]   | passed | 1.36 seconds    |
+./spec/system/posts_spec.rb[1:1:2]   | passed | 1.12 seconds    |
+./spec/system/users_spec.rb[1:1:1:1] | passed | 1.97 seconds    |

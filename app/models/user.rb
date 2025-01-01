@@ -1,10 +1,9 @@
 class User < ApplicationRecord
-
+  has_many :posts, dependent: :destroy
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-
-  has_many :posts, dependent: :destroy
 
   # アイコンのアップローダ
   mount_uploader :icon, IconUploader
