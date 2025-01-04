@@ -1,0 +1,69 @@
+<div class="hero bg-base-200 min-h-screen flex items-center justify-center">
+  <div class="card bg-base-100 max-w-md w-full shrink-0 shadow-2xl">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-4xl font-bold py-6">お問い合わせ</h1>
+    </div>
+    <%= form_with url: contacts_path, method: :post, local: true, html: { class: 'card-body p-4' } do |f| %>
+      <% if flash[:alert] %>
+        <div id="error_explanation" class="alert alert-error mb-4">
+          <ul>
+            <li><%= flash[:alert] %></li>
+          </ul>
+        </div>
+      <% elsif flash[:notice] %>
+        <div class="alert alert-success mb-4">
+          <span><%= flash[:notice] %></span>
+        </div>
+      <% end %>
+
+      <!-- 名前入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="contact_name">
+          <span class="label-text">お名前</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-user mr-4"></i>
+          <%= f.text_field :name, placeholder: "お名前", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- メールアドレス入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="contact_email">
+          <span class="label-text">メールアドレス</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-envelope mr-4"></i>
+          <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- 件名入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="contact_subject">
+          <span class="label-text">件名</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-tag mr-4"></i>
+          <%= f.text_field :subject, placeholder: "件名を入力してください", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- メッセージ入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="contact_message">
+          <span class="label-text">メッセージ</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-comment mr-4"></i>
+          <%= f.text_area :message, placeholder: "メッセージを入力してください", class: "input input-bordered w-full", rows: 5, required: true %>
+        </div>
+      </div>
+
+      <!-- 送信ボタン -->
+      <div class="form-control mt-6">
+        <%= f.submit "送信する", class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>
