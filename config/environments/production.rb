@@ -182,10 +182,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV['MAIL_ADDRESS'],
     port:                 ENV['MAIL_PORT'],
-    domain:               'gmail.com',
+    domain:               ENV['MAIL_DOMAIN'],
     user_name:            ENV['MAIL_USERNAME'],
     password:             ENV['MAIL_PASSWORD'],
     authentication:       ENV['MAIL_AUTHENTICATION'],
-     enable_starttls_auto: ENV['MAIL_ENABLE_STARTTLS_AUTO'] == 'true'
+    enable_starttls_auto: ENV['MAIL_ENABLE_STARTTLS_AUTO'] == 'true'
   }
 end
