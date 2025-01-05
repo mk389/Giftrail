@@ -13,15 +13,15 @@ Rails.application.routes.draw do
   }
 
   # Root route
-  root 'home#index'  # 投稿一覧をトップページとして表示
+  root 'home#index'
 
   # Posts routes
   resources :posts do
     collection do
-      get :autocomplete  # autocomplete アクションを追加
+      get :autocomplete
     end
   end
 
-  # Tags routes
   resources :tags, only: [:show]
+  resources :contacts, only: [:new, :create]
 end
