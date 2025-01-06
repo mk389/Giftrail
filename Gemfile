@@ -7,7 +7,7 @@ gem "devise"
 gem "rails-i18n"
 gem 'devise-i18n'
 gem "image_processing", ">= 1.2"
-gem 'aws-sdk-s3', '~> 1.48'
+gem 'aws-sdk-s3', '~> 1.177'
 gem 'fog-aws'
 gem "importmap-rails"
 gem 'dotenv-rails'
