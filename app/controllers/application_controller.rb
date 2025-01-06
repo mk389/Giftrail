@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     posts_path
   end
+
+  def not_found
+    render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false
+  end
 end
