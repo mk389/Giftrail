@@ -1,9 +1,18 @@
-<footer id='footer' class='footer-bottom py-4'>
-  <div class='container mx-auto'>
-    <div class='flex justify-center'>
-      <div class='text-center'>
-        <div class='copyright'>
-          <p>Copyright © 2024. Giftrail</p>
+<footer id="footer" class="footer-bottom py-4">
+  <div class="container mx-auto">
+    <div class="flex justify-center items-center">
+      <div class="text-center">
+        <!-- 利用規約とプライバシーポリシーのリンク -->
+        <div class="footer-links mb-2">
+          <a href="<%= terms_of_service_path %>" class="text-sm text-gray-500 hover:text-gray-700 mx-2">利用規約</a>
+          <span>&nbsp;&nbsp;&nbsp;</span> <!-- 空白スペース -->
+          <!-- プライバシーポリシーのリンクをルーティングに変更 -->
+          <a href="<%= privacy_policy_path %>" class="text-sm text-gray-500 hover:text-gray-700 mx-2">プライバシーポリシー</a>
+        </div>
+        
+        <!-- コピーライト情報 -->
+        <div class="copyright">
+          <p>© 2024 Giftrail</p>
         </div>
       </div>
     </div>
