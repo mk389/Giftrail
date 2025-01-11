@@ -65,6 +65,32 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    @production_area = prefectures_and_countries
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @production_area = prefectures_and_countries
+  
+    # タグの更新処理
+    if params[:post][:tag_names].present?
+      tags = params[:post][:tag_names].split(',').map(&:strip).uniq
+      @post.tags = tags.map { |tag_name| Tag.find_or_create_by(name: tag_name) }
+    else
+      @post.tags.clear # タグ入力が空の場合は既存タグをクリア
+    end
+  
+    if @post.update(post_params)
+      flash[:notice] = '投稿が更新されました！'
+      redirect_to @post
+    else
+      flash.now[:alert] = '投稿の更新に失敗しました。'
+      render :edit
+    end
+  end
+
   def destroy
     @post = Post.find_by(id: params[:id])
   

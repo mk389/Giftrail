@@ -1,2 +1,71 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div class="hero bg-base-200 min-h-screen flex items-center justify-center">
+  <div class="card bg-base-100 shadow-2xl" style="max-width: 500px; width: 100%;">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-4xl font-bold py-6">投稿編集</h1>
+    </div>
+
+    <%= form_with model: @post, local: true, html: { class: 'card-body', style: "width: 100%;" } do |f| %>
+      <% if @post.errors.any? %>
+        <div id="error_explanation" class="alert alert-error mb-4">
+          <ul>
+            <% @post.errors.full_messages.uniq.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- タイトル入力欄 -->
+      <div class="form-control mb-4" style="width: 100%;">
+        <label class="label" for="post_title">
+          <span class="label-text">タイトル</span>
+        </label>
+        <div class="flex items-center" style="width: 100%;">
+          <i class="fas fa-pencil-alt mr-4"></i>
+          <%= f.text_field :title, placeholder: "タイトル", class: "input input-bordered", style: "width: calc(100% - 40px);", required: true %>
+        </div>
+      </div>
+
+      <!-- コメント入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_body">
+          <span class="label-text">コメント</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-comment mr-4"></i>
+          <%= f.text_area :body, value: @post.body, placeholder: "コメント", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
+
+      <!-- タグ入力欄 -->
+      <div class="form-control mb-4">
+        <label class="label" for="post_tags">
+          <span class="label-text">タグ</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-tags mr-4"></i>
+          <%= f.text_field :tag_names, value: @post.tags.map(&:name).join(", "), placeholder: "タグを入力（カンマ区切り）", class: "input input-bordered w-full" %>
+        </div>
+      </div>
+
+      <!-- 都道府県または国名 -->
+      <div class="form-control mb-4" style="width: 100%;">
+        <label class="label" for="post_location">
+          <span class="label-text">場所</span>
+        </label>
+        <div class="flex items-center" style="width: 100%;">
+          <i class="fas fa-map-marker-alt mr-4"></i>
+          <%= f.select :production_area,
+            options_for_select(@production_area.map { |entry| [entry[:name], entry[:name]] }),
+            { prompt: "都道府県または国名を選んでください" },
+            class: "select select-bordered", style: "width: calc(100% - 40px);", required: true %>
+        </div>
+      </div>
+
+      <!-- 投稿ボタン -->
+      <div class="form-control mt-6">
+        <%= f.submit "更新する", class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

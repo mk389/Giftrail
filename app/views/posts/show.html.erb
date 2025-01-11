@@ -30,7 +30,7 @@
           <div class="flex justify-end space-x-4 mb-2">
             <!-- 編集ボタン（現在のユーザーが投稿の所有者の場合のみ表示） -->
             <% if current_user == @post.user %>
-              <%= button_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
+              <%= link_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
                 <i class="fas fa-edit text-gray-900"></i>
               <% end %>
 

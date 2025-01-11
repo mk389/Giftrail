@@ -49,7 +49,7 @@ class User < ApplicationRecord
           password: Devise.friendly_token[0, 20],
           provider: auth.provider,
           uid: auth.uid,
-          residence: '不明'
+          residence: '居住地不明'
         )
   
         # 保存に成功した場合のみユーザーを返す
