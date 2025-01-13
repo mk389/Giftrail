@@ -1,43 +1,73 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="hero bg-base-200 min-h-screen flex items-center justify-center">
+  <div class="card bg-base-100 max-w-md shrink-0 shadow-2xl">
+    <div class="text-center mb-4" style="margin-top: 40px;">
+      <h1 class="text-4xl font-bold py-6">プロフィール編集</h1>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(current_user, url: user_registration_path, html: { class: 'card-body', enctype: 'multipart/form-data' }) do |f| %>
+      <% if current_user.errors.any? %>
+        <div id="error_explanation" class="alert alert-error mb-4">
+          <ul>
+            <% current_user.errors.full_messages.uniq.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <!-- ユーザー名 -->
+      <div class="form-control mb-4">
+        <label class="label w-full" for="user_name">
+          <span class="label-text">ユーザー名</span>
+        </label>
+        <div class="flex items-center w-full">
+          <i class="fas fa-user mr-4"></i>
+          <%= f.text_field :name, placeholder: "ユーザー名", class: "input input-bordered w-full", required: true %>
+        </div>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <!-- メールアドレス -->
+      <div class="form-control mb-4">
+        <label class="label w-full" for="user_email">
+          <span class="label-text">メールアドレス</span>
+        </label>
+        <div class="flex items-center w-full">
+          <i class="fas fa-envelope mr-4"></i>
+          <%= f.email_field :email, placeholder: "メールアドレス", class: "input input-bordered w-full", required: true, autocomplete: "email" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <!-- 居住地 -->
+      <div class="form-control mb-4">
+        <label class="label" for="user_residence">
+          <span class="label-text">居住地</span>
+        </label>
+        <div class="flex items-center">
+          <i class="fas fa-map-marker-alt mr-4"></i>
+    
+        <!-- 居住地のプルダウン、選択なしの状態を設定 -->
+        <%= f.select :residence,
+          options_for_select(@residence.present? ? @residence.map { |entry| [entry[:name], entry[:name]] } : [], current_user.residence.presence),
+          { include_blank: "選択なし" },
+          class: "select select-bordered w-full", required: false %>
+        </div>
+      </div>
+
+      <!-- プロフィール画像 -->
+      <div class="form-control mb-4">
+        <label class="label w-full" for="user_icon">
+          <span class="label-text">プロフィール画像</span>
+        </label>
+        <div class="flex items-center w-full">
+          <i class="fas fa-image mr-4"></i>
+          <%= f.file_field :icon, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
+        </div>
+      </div>
+
+      <!-- 保存ボタン -->
+      <div class="form-control mt-6">
+        <%= f.submit "保存", class: "btn btn-primary w-full" %>
+      </div>
     <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
