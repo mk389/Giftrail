@@ -40,3 +40,5 @@
 
 # Ignore environment files
 .env
+
+/public/uploads/

@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include LocationHelper
 
+  before_action :authenticate_user!
   before_action :set_residence_options, only: [:new, :edit]
 
   def new
@@ -15,10 +16,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def edit
+    @user = current_user # 現在のユーザーを編集画面に渡す
+  end
+
+  # プロフィール情報を更新
+  def update
+    @user = current_user # 現在のユーザーを取得
+    if @user.update(user_params)
+      redirect_to root_path, notice: 'プロフィールが更新されました'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def set_residence_options
     @residence = prefectures_and_countries
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :residence, :icon)
   end
 
   def build_resource(hash = {})

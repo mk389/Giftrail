@@ -63,7 +63,27 @@ class User < ApplicationRecord
     end
   end
 
+  after_save :convert_icon_if_heic
+
   def self.create_unique_string
     SecureRandom.uuid
+  end
+
+  def convert_icon_if_heic
+    return unless icon.present? && File.extname(icon.file.filename).downcase == ".heic"
+  
+    # CarrierWave でアップロードされたファイルを MiniMagick で変換
+    image = MiniMagick::Image.open(icon.file.file)
+    image.format "jpeg"
+  
+    # 元のファイルを置き換え
+    temp_file = Tempfile.new(["converted", ".jpg"], binmode: true)
+    image.write(temp_file.path)
+  
+    # CarrierWave に再アップロード
+    self.icon = temp_file
+    save!
+  ensure
+    temp_file.close! if temp_file
   end
 end
