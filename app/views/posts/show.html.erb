@@ -18,7 +18,6 @@
           <div class="swiper-pagination"></div>
         </div>
       <% else %>
-        <!-- 画像がない場合はダミー画像を表示 -->
         <img class="object-cover object-center rounded w-full h-full" alt="投稿画像" src="https://dummyimage.com/720x600">
       <% end %>
     </div>
@@ -27,31 +26,47 @@
     <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
       <div class="relative mb-4 w-full">
         <div class="flex flex-col">
-          <div class="flex justify-end space-x-4 mb-2">
-            <!-- 編集ボタン（現在のユーザーが投稿の所有者の場合のみ表示） -->
-            <% if current_user == @post.user %>
+
+          <!-- 編集・削除ボタン（ユーザー名の上に配置） -->
+          <% if current_user == @post.user %>
+            <div class="absolute top-[-30px] right-0 flex space-x-4">
               <%= link_to edit_post_path(@post), class: 'btn btn-ghost btn-circle' do %>
                 <i class="fas fa-edit text-gray-900"></i>
               <% end %>
-
-              <!-- 削除ボタン（現在のユーザーが投稿の所有者の場合のみ表示） -->
               <%= button_to post_path(@post), method: :delete, class: 'btn btn-ghost btn-circle text-red-500' do %>
                 <i class="fas fa-trash-alt"></i>
               <% end %>
+            </div>
+          <% end %>
+
+          <!-- 評価の表示部分 -->
+          <div class="flex items-center justify-start space-x-2 mb-4">
+            <% if @post.average_rating > 0 %>
+              <div class="flex items-center">
+                <span class="font-bold text-xl text-yellow-500"><%= @post.average_rating %></span>
+                <% (1..5).each do |i| %>
+                  <% if @post.average_rating >= i %>
+                    <i class="fas fa-star text-yellow-500"></i>
+                  <% elsif @post.average_rating >= i - 0.5 %>
+                    <i class="fas fa-star-half-alt text-yellow-500"></i>
+                  <% else %>
+                    <i class="far fa-star text-yellow-500"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            <% else %>
+              <span class="text-gray-500">評価なし</span>
             <% end %>
           </div>
 
           <!-- 投稿タイトルとユーザー情報 -->
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between items-center mb-4">
             <div class="flex items-center space-x-4">
-              <!-- タイトルサイズ変更 -->
               <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900">
                 <span class="font-bold"><%= @post.title %></span>
               </h1>
             </div>
-            <!-- ユーザーアイコン、ユーザーネーム、居住地 -->
             <div class="flex items-center ml-auto space-x-4">
-              <!-- ユーザーアイコン -->
               <div class="avatar w-8 h-8 rounded-full overflow-hidden">
                 <% if @post.user.icon.present? %>
                   <img src="<%= @post.user.icon.url %>" alt="ユーザーアイコン">
@@ -84,7 +99,7 @@
       </div>
 
       <!-- タグ部分 -->
-      <div class="mt-6"> <!-- タグ部分のマージンを調整 -->
+      <div class="mt-6">
         <div class="flex flex-wrap gap-2">
           <% @post.tags.each do |tag| %>
             <%= link_to "##{tag.name}", posts_path(tag: tag.name), class: "btn btn-primary" %>
@@ -95,22 +110,3 @@
     </div>
   </div>
 </section>
-
-<!-- Swiperのスクリプトを追加 -->
-<script>
-  window.onload = function() {
-    const swiper_main = new Swiper('.swiper-main', {
-      spaceBetween: 10,
-      slidesPerView: 1,
-      loop: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
-  };
-</script>
