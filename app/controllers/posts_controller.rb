@@ -32,13 +32,14 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @post.ratings.build
     @production_area = prefectures_and_countries
   end
 
   def create
     @post = current_user.posts.build(post_params)
     @production_area = prefectures_and_countries
-    
+
     # タグ処理
     if params[:post][:tag_names].present?
       tags = params[:post][:tag_names].split(',').map(&:strip).uniq
@@ -47,8 +48,13 @@ class PostsController < ApplicationController
         @post.tags << tag
       end
     end
-  
+
     if @post.save
+      # 評価を保存する
+      if params[:post][:rating].present?
+        rating_value = params[:post][:rating].to_f
+        @post.ratings.create(user: current_user, rating_value: rating_value)
+      end
       flash[:notice] = '投稿が作成されました！'
       redirect_to @post
     else
@@ -92,15 +98,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
-  
-    if @post && @post.user == current_user
-      @post.destroy
-      flash[:notice] = '投稿が削除されました。'
-    end
-  
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = "投稿が削除されました"
     redirect_to posts_path
-  end  
+  end 
 
   def autocomplete
     query = params[:query]

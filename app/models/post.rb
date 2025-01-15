@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  has_many :ratings, dependent: :destroy
 
   before_save :extract_tags
 
@@ -34,7 +35,13 @@ class Post < ApplicationRecord
       article_tag = Tag.find_or_create_by(name: new_name)
       self.tags << article_tag
     end
- end
+  end
+
+  def average_rating
+    return 0 if ratings.empty?  # 評価が一つもない場合は0を返す
+
+    ratings.average(:rating_value).to_f.round(1)  # 評価値の平均を計算して小数第1位で丸める
+  end
 
   private
 

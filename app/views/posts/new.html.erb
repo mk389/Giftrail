@@ -19,10 +19,7 @@
         <label class="label" for="post_title">
           <span class="label-text">タイトル</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-pencil-alt mr-4"></i>
-          <%= f.text_field :title, placeholder: "タイトル", class: "input input-bordered w-full", required: true %>
-        </div>
+        <%= f.text_field :title, placeholder: "タイトル", class: "input input-bordered w-full", required: true %>
       </div>
 
       <!-- コメント入力欄 -->
@@ -30,10 +27,7 @@
         <label class="label" for="post_body">
           <span class="label-text">コメント</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-comment mr-4"></i>
-          <%= f.text_area :body, placeholder: "コメント", class: "input input-bordered w-full", required: true %>
-        </div>
+        <%= f.text_area :body, placeholder: "コメント", class: "input input-bordered w-full", required: true %>
       </div>
 
       <!-- タグ入力欄 -->
@@ -41,10 +35,7 @@
         <label class="label" for="post_tags">
           <span class="label-text">タグ</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-tags mr-4"></i>
-          <%= f.text_field :tag_names, placeholder: "タグを入力（カンマ区切り）", class: "input input-bordered w-full" %>
-        </div>
+        <%= f.text_field :tag_names, placeholder: "タグを入力（カンマ区切り）", class: "input input-bordered w-full" %>
       </div>
 
       <!-- 都道府県または国名 -->
@@ -52,12 +43,24 @@
         <label class="label" for="post_location">
           <span class="label-text">場所</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-map-marker-alt mr-4"></i>
-          <%= f.select :production_area,
-            options_for_select(@production_area.map { |entry| [entry[:name], entry[:name]] }),
-            { prompt: "都道府県または国名を選んでください" },
-            class: "select select-bordered w-full", required: true %>
+        <%= f.select :production_area, options_for_select(@production_area.map { |entry| [entry[:name], entry[:name]] }), { prompt: "都道府県または国名を選んでください" }, class: "select select-bordered w-full", required: true %>
+      </div>
+
+
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text">評価</span>
+        </label>
+        <div class="rating rating-lg rating-half">
+          <% (0.5..5.0).step(0.5).each_with_index do |rating, index| %>
+            <input 
+              type="radio" 
+              id="rating_<%= index %>" 
+              name="post[rating]" 
+              value="<%= rating %>" 
+              class="mask <%= index.even? ? 'mask-half-1' : 'mask-half-2' %> mask-star-2 bg-green-500" 
+            />
+          <% end %>
         </div>
       </div>
 
@@ -66,10 +69,7 @@
         <label class="label" for="post_images">
           <span class="label-text">画像</span>
         </label>
-        <div class="flex items-center">
-          <i class="fas fa-image mr-4"></i>
-          <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
-        </div>
+        <%= f.file_field :images, multiple: true, class: "file-input file-input-bordered file-input-primary w-full max-w-xs" %>
       </div>
 
       <!-- 投稿ボタン -->
