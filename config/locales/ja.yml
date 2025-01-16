@@ -5,6 +5,7 @@ ja:
         residence: "居住地"
       post:
         images: "画像"
+        title: "タイトル"
   devise:
     registrations:
       user:

@@ -88,6 +88,19 @@ class PostsController < ApplicationController
       @post.tags.clear # タグ入力が空の場合は既存タグをクリア
     end
   
+    # 評価の更新処理
+    if params[:post][:rating_value].present?
+      rating_value = params[:post][:rating_value].to_f
+      # もし既に評価がある場合、評価を更新
+      if @post.ratings.exists?
+        @post.ratings.first.update(rating_value: rating_value)
+      else
+        # 評価がなければ新規に作成
+        @post.ratings.create(rating_value: rating_value)
+      end
+    end
+  
+    # 投稿の更新処理
     if @post.update(post_params)
       flash[:notice] = '投稿が更新されました！'
       redirect_to @post

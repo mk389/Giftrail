@@ -6,7 +6,8 @@ class Post < ApplicationRecord
 
   before_save :extract_tags
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 33 }
+  validates :body, presence: true, length: { maximum: 500 }
   validates :production_area, presence: true
   validates :images, presence: true
 
@@ -38,9 +39,7 @@ class Post < ApplicationRecord
   end
 
   def average_rating
-    return 0 if ratings.empty?  # 評価が一つもない場合は0を返す
-
-    ratings.average(:rating_value).to_f.round(1)  # 評価値の平均を計算して小数第1位で丸める
+    ratings.average(:rating_value).to_f
   end
 
   private

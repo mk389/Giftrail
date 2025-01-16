@@ -61,8 +61,8 @@
 
           <!-- 投稿タイトルとユーザー情報 -->
           <div class="flex justify-between items-center mb-4">
-            <div class="flex items-center space-x-4">
-              <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900">
+            <div class="w-full sm:w-auto">
+              <h1 class="title-font sm:text-5xl text-4xl font-medium text-gray-900 break-words break-all">
                 <span class="font-bold"><%= @post.title %></span>
               </h1>
             </div>
@@ -93,20 +93,19 @@
         </div>
       </div>
 
-      <!-- 投稿内容 -->
-      <div class="mb-6 leading-relaxed text-lg text-gray-500 text-left whitespace-pre-line">
-        <%= simple_format(@post.body) %>
-      </div>
-
-      <!-- タグ部分 -->
-      <div class="mt-6">
-        <div class="flex flex-wrap gap-2">
-          <% @post.tags.each do |tag| %>
-            <%= link_to "##{tag.name}", posts_path(tag: tag.name), class: "btn btn-primary" %>
-          <% end %>
+      <!-- コメント部分 -->
+      <div class="mb-6 leading-relaxed text-lg text-gray-500 text-left">
+        <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-md" style="width: 700px; max-width: 95%;">
+          <%= simple_format(@post.body) %>
         </div>
       </div>
 
+      <!-- タグ部分 -->
+      <div class="flex flex-wrap gap-2">
+        <% @post.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", posts_path(tag: tag.name), class: "text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 text-gray-700 rounded hover:bg-gray-300" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>

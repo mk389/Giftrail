@@ -22,12 +22,12 @@
         <%= f.text_field :title, placeholder: "タイトル", class: "input input-bordered w-full", required: true %>
       </div>
 
-      <!-- コメント入力欄 -->
+      <!-- 内容入力欄 -->
       <div class="form-control mb-4">
         <label class="label" for="post_body">
-          <span class="label-text">コメント</span>
+          <span class="label-text">内容</span>
         </label>
-        <%= f.text_area :body, placeholder: "コメント", class: "input input-bordered w-full", required: true %>
+        <%= f.text_area :body, placeholder: "内容", class: "input input-bordered w-full", required: true %>
       </div>
 
       <!-- タグ入力欄 -->
@@ -41,12 +41,12 @@
       <!-- 都道府県または国名 -->
       <div class="form-control mb-4">
         <label class="label" for="post_location">
-          <span class="label-text">場所</span>
+          <span class="label-text">産地</span>
         </label>
         <%= f.select :production_area, options_for_select(@production_area.map { |entry| [entry[:name], entry[:name]] }), { prompt: "都道府県または国名を選んでください" }, class: "select select-bordered w-full", required: true %>
       </div>
 
-
+      <!-- 評価 -->
       <div class="form-control mb-4">
         <label class="label">
           <span class="label-text">評価</span>
