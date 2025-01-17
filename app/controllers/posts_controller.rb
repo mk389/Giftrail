@@ -125,6 +125,10 @@ class PostsController < ApplicationController
     render json: @posts.map { |post| { title: post.title, body: post.body, production_area: post.production_area } }
   end
 
+  def my_posts
+    @posts = current_user.posts.order(created_at: :desc).page(params[:page]).per(15)
+  end
+
   private
 
   def set_post

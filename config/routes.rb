@@ -28,5 +28,7 @@ Rails.application.routes.draw do
   resources :tags, only: [:show]
   resources :contacts, only: [:new, :create]
 
+  get 'my_posts', to: 'posts#my_posts', as: 'my_posts'
+  
   match '*path', to: 'application#not_found', via: :all
 end
