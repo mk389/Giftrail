@@ -1,4 +1,4 @@
-// Entry point for the build script in your package.json
+// 必要なライブラリをインポート
 import "@hotwired/turbo-rails"
 import { Application } from "@hotwired/stimulus"
 import "./controllers"
@@ -6,8 +6,11 @@ import "./controllers"
 // Stimulusの設定
 const application = Application.start()
 
+// デバッグ設定（開発時に有用）
 application.debug = false
+
+// Stimulusをグローバルでアクセスできるように設定
 window.Stimulus = application
 
+// アプリケーションをエクスポート
 export { application }
-import "controllers"
