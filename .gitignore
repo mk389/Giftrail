@@ -41,4 +41,5 @@
 # Ignore environment files
 .env
 
-/public/uploads/
+/public/uploads/node_modules/
+dist/
