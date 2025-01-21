@@ -18,7 +18,7 @@ ja:
       confirmation_instructions:
         subject: "アカウント確認メール"
       reset_password_instructions:
-        subject: "パスワードの再設定手順"
+        subject: "パスワード再設定"
       unlock_instructions:
         subject: "ロック解除手順"
       email_changed:
@@ -33,7 +33,7 @@ ja:
       send_instructions: "パスワードリセットメールが送信されました"
       send_paranoid_instructions: "あなたのメールアドレスが私たちのデータベースに存在する場合、数分以内にメールアドレスにパスワードリカバリーリンクが届きます。"
       updated: "パスワードが変更されました。"
-      updated_not_active: "パスワードが変更されました。"
+      updated_not_active: "パスワードが変更されました。再度ログインしてください。"
     registrations:
       destroyed: "アカウントが登録がキャンセルされました。"
       signed_up: "アカウント登録が完了しました。"
@@ -60,5 +60,5 @@ ja:
       not_found: "見つかりませんでした。"
       not_locked: "ロックされていませんでした。"
       not_saved:
-        one: "1つのエラーがこの %{resource} の保存を妨げました。"
-        other: "%{count}のエラーがこの %{resource} の保存を妨げました。"
+        one: "保存中にエラーが発生しました。"
+        other: "保存中に複数のエラーが発生しました。"
