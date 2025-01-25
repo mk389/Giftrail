@@ -11,7 +11,7 @@
 
         <!-- Xシェアボタン -->
         <div id="share-button" class="mt-4">
-          <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(default_meta_tags[:description])}", 
+          <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(root_url)}&text=#{CGI.escape(default_meta_tags[:description] + " 投稿してみよう！")}", 
                       target: "_blank", 
                       class: "inline-block" do %>
             <%= image_tag 'logo-black.png', alt: 'X Logo', style: 'width: 20px; height: 20px;' %>
