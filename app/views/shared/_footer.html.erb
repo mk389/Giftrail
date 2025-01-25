@@ -6,9 +6,18 @@
         <div class="footer-links mb-2">
           <a href="<%= terms_of_service_path %>" class="text-sm text-gray-500 hover:text-gray-700 mx-2">利用規約</a>
           <span>&nbsp;&nbsp;&nbsp;</span> <!-- 空白スペース -->
-          <!-- プライバシーポリシーのリンクをルーティングに変更 -->
           <a href="<%= privacy_policy_path %>" class="text-sm text-gray-500 hover:text-gray-700 mx-2">プライバシーポリシー</a>
         </div>
+
+        <!-- Xシェアボタン -->
+        <div id="share-button" class="mt-4">
+          <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(default_meta_tags[:description])}", 
+                      target: "_blank", 
+                      class: "inline-block" do %>
+            <%= image_tag 'logo-black.png', alt: 'X Logo', style: 'width: 20px; height: 20px;' %>
+          <% end %>
+        </div>
+
         
         <!-- コピーライト情報 -->
         <div class="copyright">
@@ -18,4 +27,3 @@
     </div>
   </div>
 </footer>
-
