@@ -1,0 +1,14 @@
+<% favorites_count = post.favorites.count %>
+
+<div class="flex items-center space-x-1" id="post_<%= post.id %>_favorite">
+  <% if current_user && current_user.favorites.exists?(post: post) %>
+    <%= button_to post_favorite_path(post), method: :delete, remote: true, class: "btn btn-heart flex items-center space-x-1" do %>
+      <i class="fas fa-heart text-red-500 text-lg"></i>
+    <% end %>
+  <% else %>
+    <%= button_to post_favorites_path(post), method: :post, remote: true, class: "btn btn-heart flex items-center space-x-1" do %>
+      <i class="far fa-heart text-gray-500 text-lg"></i>
+    <% end %>
+  <% end %>
+  <span class="text-gray-700 text-lg"><%= favorites_count %></span>
+</div>
