@@ -83,24 +83,29 @@
             </div>
           </div>
 
-          <!-- 産地情報 -->
-          <% if @post.production_area.present? %>
-            <div class="flex items-center mt-2 text-gray-900">
-              <i class="fas fa-map-marker-alt w-3 h-3 mr-1"></i>
-              <span><%= @post.production_area %></span>
+          <!-- 産地情報といいねボタン -->
+          <div class="flex items-center justify-between mt-2 text-gray-900">
+            <% if @post.production_area.present? %>
+              <div class="flex items-center">
+                <i class="fas fa-map-marker-alt w-3 h-3 mr-1"></i>
+                <span><%= @post.production_area %></span>
+              </div>
+            <% end %>
+            <div id="post_<%= @post.id %>_favorite">
+              <%= render "shared/favorite", post: @post %>
             </div>
-          <% end %>
+          </div>
+
         </div>
       </div>
 
-          <!-- コメント部分 -->
-            <div class="mb-6 leading-relaxed text-lg text-gray-500 text-left relative">
-              <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-md relative" style="width: 700px; max-width: 95%;">
-                <%= simple_format(@post.body) %>
-    
+      <!-- コメント部分 -->
+      <div class="mb-6 leading-relaxed text-lg text-gray-500 text-left relative">
+        <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-md relative" style="width: 700px; max-width: 95%;">
+          <%= simple_format(@post.body) %>
           <!-- 投稿日時 -->
           <div class="absolute bottom-2 right-2 text-xs text-gray-400">
-            <%= @post.created_at.strftime('%Y-%m-%d') %> <!-- フォーマット例: 2023-01-01 12:34 -->
+            <%= @post.created_at.strftime('%Y-%m-%d') %>
           </div>
         </div>
       </div>
