@@ -127,6 +127,7 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = current_user.posts.order(created_at: :desc).page(params[:page]).per(15)
+    @favorite_posts = current_user.favorites.includes(:post).map(&:post)
   end
 
   private

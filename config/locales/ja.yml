@@ -20,7 +20,9 @@ ja:
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
-
+  errors:
+    messages:
+      mini_magick_processing_error: 処理中にエラーが発生しました。画像を確認してください。
 select_options:
     location:
       japan_prefectures:
