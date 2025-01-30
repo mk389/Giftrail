@@ -44,3 +44,4 @@ app/assets/builds/application.js.map
 /public/uploads/node_modules/
 dist/
 /public/assets/*.map
+public/uploads/post/images
