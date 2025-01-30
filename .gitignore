@@ -45,3 +45,4 @@ app/assets/builds/application.js.map
 dist/
 /public/assets/*.map
 public/uploads/post/images
+public/uploads/tmp
