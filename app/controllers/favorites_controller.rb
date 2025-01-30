@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
   
+  def index
+    @favorite_posts = current_user.favorites.includes(:post).map(&:post)
+  end
+  
   def create
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.new(post_id: post.id)

@@ -6,38 +6,28 @@
 
     <!-- タブのコンテナ -->
     <div role="tablist" class="tabs tabs-lifted">
-      <!-- タブ 1: 投稿一覧 -->
+      
+      <!-- 投稿一覧 -->
       <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="投稿一覧" id="tab1" checked="checked" />
       <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-
-        <!-- 投稿がない場合のメッセージ -->
         <% if @posts.empty? %>
           <p>まだ投稿がありません。</p>
         <% else %>
-          <!-- 投稿一覧 -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <% @posts.each do |post| %>
               <div class="card bg-base-100 shadow-md">
                 <div class="card-body">
-                  <!-- 複数の投稿画像を表示 -->
                   <% if post.images.any? %>
+                    <!-- 画像は最初の1枚のみ表示 -->
                     <div class="post-images">
-                      <% post.images.each do |image| %>
-                        <div class="post-image">
-                          <%= image_tag image.url, alt: post.title, class: "w-full h-48 object-cover" %>
-                        </div>
-                      <% end %>
+                      <div class="post-image w-full">
+                        <%= image_tag post.images.first.url, alt: post.title, class: "w-full h-48 object-cover" %>
+                      </div>
                     </div>
                   <% end %>
-
-                  <!-- 投稿のタイトル -->
                   <h3 class="text-xl font-semibold"><%= post.title %></h3>
-
-                  <!-- 投稿の作成日 -->
                   <div class="flex justify-between mt-2">
-                    <span class="text-sm text-gray-500">
-                      <%= post.created_at.strftime('%Y-%m-%d') %>
-                    </span>
+                    <span class="text-sm text-gray-500"><%= post.created_at.strftime('%Y-%m-%d') %></span>
                     <%= link_to '詳細', post_path(post), class: 'btn btn-link' %>
                   </div>
                 </div>
@@ -46,11 +36,35 @@
           </div>
         <% end %>
       </div>
-
-      <!-- タブ 2: お気に入り機能（仮で実装） -->
+      
+      <!-- お気に入り一覧 -->
       <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="お気に入り一覧" id="tab2" />
       <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-        <p>投稿機能はまだ実装されていません。</p>
+        <% if @favorite_posts.nil? || @favorite_posts.empty? %>
+          <p>お気に入りの投稿はまだありません。</p>
+        <% else %>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <% @favorite_posts.each do |post| %>
+              <div class="card bg-base-100 shadow-md">
+                <div class="card-body">
+                  <% if post.images.any? %>
+                    <!-- 画像は最初の1枚のみ表示 -->
+                    <div class="post-images">
+                      <div class="post-image w-full">
+                        <%= image_tag post.images.first.url, alt: post.title, class: "w-full h-48 object-cover" %>
+                      </div>
+                    </div>
+                  <% end %>
+                  <h3 class="text-xl font-semibold"><%= post.title %></h3>
+                  <div class="flex justify-between mt-2">
+                    <span class="text-sm text-gray-500"><%= post.created_at.strftime('%Y-%m-%d') %></span>
+                    <%= link_to '詳細', post_path(post), class: 'btn btn-link' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
