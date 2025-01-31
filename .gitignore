@@ -46,3 +46,4 @@ dist/
 /public/assets/*.map
 public/uploads/post/images
 public/uploads/tmp
+public/uploads/user/icon
