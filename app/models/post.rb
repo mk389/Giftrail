@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_many :ratings, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   before_save :extract_tags
 
