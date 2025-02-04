@@ -1,0 +1,36 @@
+<div class="flex items-center">
+  <!-- コメントアイコン -->
+  <button onclick="toggleComments(<%= post.id %>)" class="text-gray-600 hover:text-gray-900">
+    <i class="fas fa-comment text-lg"></i>
+  </button>
+  <!-- コメントカウント -->
+  <span class="text-gray-700 text-lg ml-4"><%= post.comments.count %></span>
+</div>
+
+<!-- コメント一覧モーダル -->
+<div id="comments-container-<%= post.id %>" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-3/4 md:w-1/2 lg:w-1/3 relative">
+    <button class="absolute top-2 right-2 text-gray-600 hover:text-gray-900" onclick="toggleComments(<%= post.id %>)">
+      <i class="fas fa-times text-lg"></i>
+    </button>
+
+    <h2 class="text-xl font-semibold mb-4">コメント一覧</h2>
+
+    <div class="space-y-4 max-h-60 overflow-y-auto">
+      <% post.comments.each do |comment| %>
+        <div class="border-b pb-2">
+          <p class="text-gray-900 font-semibold"><%= comment.user.name %></p>
+          <p class="text-gray-600"><%= comment.body %></p>
+          <p class="text-xs text-gray-400"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_with(model: [post, Comment.new], local: true, class: "mt-4") do |f| %>
+      <div class="flex">
+        <%= f.text_field :body, class: "flex-1 border rounded-l px-3 py-2", placeholder: "コメントを入力..." %>
+        <%= f.submit "送信", class: "bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600" %>
+      </div>
+    <% end %>
+  </div>
+</div>

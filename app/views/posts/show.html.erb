@@ -83,7 +83,7 @@
             </div>
           </div>
 
-          <!-- 産地情報といいねボタン -->
+          <!-- 産地情報 -->
           <div class="flex items-center justify-between mt-2 text-gray-900">
             <% if @post.production_area.present? %>
               <div class="flex items-center">
@@ -91,6 +91,13 @@
                 <span><%= @post.production_area %></span>
               </div>
             <% end %>
+          <div class="flex items-center space-x-4">
+            <!-- コメント -->
+            <div id="post_<%= @post.id %>_comments">
+              <%= render "shared/comments", post: @post %>
+            </div>
+
+            <!-- お気に入り -->
             <div id="post_<%= @post.id %>_favorite">
               <%= render "shared/favorite", post: @post %>
             </div>
