@@ -1,0 +1,30 @@
+<h2 class="text-xl font-semibold mb-4 text-center">コメント一覧</h2>
+
+<div class="space-y-4 max-w-2xl mx-auto">
+  <% @comments.each do |comment| %>
+    <div class="card bg-base-100 shadow-xl p-4 mb-4">
+      <div class="card-body">
+        <h3 class="font-semibold text-lg text-gray-900"><%= comment.user.name %></h3>
+        <p class="text-gray-700"><%= comment.body %></p>
+        <p class="text-xs text-gray-500"><%= comment.created_at.strftime('%Y-%m-%d') %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- コメント入力フォーム -->
+<div class="mt-6 max-w-lg mx-auto">
+  <%= form_with(model: [@post, Comment.new], local: true, class: "form-control") do |f| %>
+    <div class="flex items-center gap-2">
+      <!-- コメント入力欄（少し長めに） -->
+      <%= f.text_field :body, class: "input input-bordered px-4 py-2 w-96", placeholder: "コメントを入力..." %>
+      <!-- 送信ボタン -->
+      <%= f.submit "送信", class: "btn btn-primary px-4 py-2" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- 投稿詳細ページに戻るボタン -->
+<div class="mt-6 text-center">
+  <%= link_to "投稿に戻る", post_path(@post), class: "btn btn-link" %>
+</div>
