@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # Posts routes
   resources :posts do
     resources :favorites, only: [:index, :create, :destroy]
-    resources :comments, only: [:index, :create]
+    resources :comments, only: [:index, :create, :destroy]
     collection do
       get :autocomplete
     end
