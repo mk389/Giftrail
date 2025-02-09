@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_post, only: [:index, :create]
+  before_action :set_post, only: [:index, :create, :destroy]
 
   def index
     @comments = @post.comments.includes(:user).order(created_at: :desc)
@@ -14,6 +14,20 @@ class CommentsController < ApplicationController
       render :index
     end
   end
+
+  def destroy
+    @comment = @post.comments.find(params[:id])
+    if @comment.user == current_user || current_user.admin?
+      @comment.destroy
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
+        format.html { redirect_to post_comments_path(@post), notice: "コメントを削除しました" }
+      end
+    else
+      redirect_to post_comments_path(@post), alert: "コメントを削除する権限がありません。"
+    end
+  end  
+  
 
   private
 
